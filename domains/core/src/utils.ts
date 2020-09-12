@@ -14,7 +14,7 @@ export const deepMerge = <T1 extends Record<string, any>, T2 extends Record<stri
       target[key] = deepMerge<T1, T2>(targetValue, sourceValue);
     } else {
       // @ts-ignore
-      target[key] = sourceValue; // > Arrays will be overwritten
+      target[key] = sourceValue; // Arrays will always be overwritten here. Todo?
     }
   });
   return target;
