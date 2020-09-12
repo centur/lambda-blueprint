@@ -33,16 +33,20 @@ cdk bootstrap
 ### 3. How to invoke the API?
 
 ```
-1. Get access_token
+1. Get access_token (m2m-communication)
 curl -X POST --user <clientId>:<clientSecret> "https://<domain>.auth.<region>.amazoncognito.com/oauth2/token?grant_type=client_credentials" -H "Content-Type: application/x-www-form-urlencoded"
 
-2. Use access_token
-curl -X POST   "https://<API-Id>.execute-api.<region>.amazonaws.com/v1/<resource>"        -H "Authorization:<access_token>" -H "Content-Type: application/json" -d "{<payload>}"
+2. Use access_token (m2m-communication)
+curl -X POST   "https://<API-Id>.execute-api.<region>.amazonaws.com/v1/<resource>"        -H "Authorization:<access_token>" -H "Content-Type: application/json" -d "{<payload>}" (domains/<domain>/src/dtos/create-dto.ts)
 curl -X DELETE "https://<API-Id>.execute-api.<region>.amazonaws.com/v1/<resource>/<uuid>" -H "Authorization:<access_token>"
-curl -X PUT    "https://<API-Id>.execute-api.<region>.amazonaws.com/v1/<resource>/<uuid>" -H "Authorization:<access_token>" -H "Content-Type: application/json" -d "{<payload>}"
+curl -X PUT    "https://<API-Id>.execute-api.<region>.amazonaws.com/v1/<resource>/<uuid>" -H "Authorization:<access_token>" -H "Content-Type: application/json" -d "{<payload>}" (domains/<domain>/src/dtos/update-dto.ts)
 curl -X GET    "https://<API-Id>.execute-api.<region>.amazonaws.com/v1/<resource>/<uuid>" -H "Authorization:<access_token>"
 ```
 
-### 4. Todos
+### 4. Resources
+
+- https://serverless-stack.com/
+
+### 5. Todos
 
 ...
