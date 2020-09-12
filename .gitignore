@@ -3,7 +3,6 @@
 coverage/
 
 template.yaml
-
 cdk.out/
 
 node_modules/

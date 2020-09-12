@@ -1,123 +1,48 @@
-This project was structured as Mono-Repository and was bootstrapped with [lerna](https://github.com/lerna/lerna).
+# lambda-blueprint
 
-## Prerequisites
+[![Code-Style: prettier](https://img.shields.io/badge/code_style-prettier-ff69b4.svg)](https://github.com/prettier/prettier)
+[![Dependabot-Status](https://api.dependabot.com/badges/status?host=github&repo=Syy0n/lambda-blueprint)](https://dependabot.com)
 
-This project requires the following tools:
+ddd-driven blueprint of a lambda-based http-backend, written in javascript/typescript.
 
-- [Node.js](https://nodejs.org/en/download) (v12)
+### 1. Prerequisites
 
+- [node.js](https://nodejs.org/en/download)
 - [aws-cli](https://docs.aws.amazon.com/cli/index.html)
-- [aws-sam](https://docs.aws.amazon.com/serverless-application-model/index.html)
-
-## Available scripts
-
-This project provides the following scripts:
-
-```bash
-npm install
-```
-
-Installs all devDependencies.
-
-```bash
-npm run compile
-```
-Installs all runDependencies in all domains and compiles all domains (in dependency-order).
-
-```bash
-npm run bundler
-```
-
-Runs `compile` in all domains via [PRE-hook](https://docs.npmjs.com/misc/scripts), and then runs [webpack](https://www.npmjs.com/package/webpack) to bundle all lambda-functions. TODO
 
 ---
 
-For tests [jest](https://www.npmjs.com/package/jest) and [ts-jest](https://www.npmjs.com/package/ts-jest) are used.
-
-```bash
-npm run test:unit
+- [Bootstrapping the aws-cdk:](https://docs.aws.amazon.com/cdk/latest/guide/bootstrapping.html)
+```
+cdk bootstrap
 ```
 
-Runs all unit-tests (test-files with `unit`-suffix) in the project.
+### 2. How to create the API?
 
-```bash
-npm run test:int
+```
+1. npm install
+2. npm run build
+3. npm run test:unit (optional, have a look at the ci.yaml)
+4. npm run test:intr (optional, have a look at the ci.yaml)
+5. npm run bundle
+6. npm run deploy:<env> (env = qa | prod)
+7. npm run remove:<env> (env = qa | prod)
+...
 ```
 
-Runs all int-tests (test-files with `int`-suffix)   in the project.
-Uses [dotenv](https://www.npmjs.com/package/dotenv) to run `.env`-file for all int-tests. Uses [dynamodb-local](https://hub.docker.com/r/amazon/dynamodb-local) to run dynamodb for all int-tests.
+### 3. How to invoke the API?
 
-```bash
-npm run test:e2e
+```
+1. Get access_token
+curl -X POST --user <clientId>:<clientSecret> "https://<domain>.auth.<region>.amazoncognito.com/oauth2/token?grant_type=client_credentials" -H "Content-Type: application/x-www-form-urlencoded"
+
+2. Use access_token
+curl -X POST   "https://<API-Id>.execute-api.<region>.amazonaws.com/v1/<resource>"        -H "Authorization:<access_token>" -H "Content-Type: application/json" -d "{<payload>}"
+curl -X DELETE "https://<API-Id>.execute-api.<region>.amazonaws.com/v1/<resource>/<uuid>" -H "Authorization:<access_token>"
+curl -X PUT    "https://<API-Id>.execute-api.<region>.amazonaws.com/v1/<resource>/<uuid>" -H "Authorization:<access_token>" -H "Content-Type: application/json" -d "{<payload>}"
+curl -X GET    "https://<API-Id>.execute-api.<region>.amazonaws.com/v1/<resource>/<uuid>" -H "Authorization:<access_token>"
 ```
 
-Runs all e2e-tests (test-files with `e2e`-suffix)   in the project.
+### 4. Todos
 
-**Tip:**
-To run *-tests for a specific domain, simply go into its package and run the same test-commands there.
-
----
-
-```bash
-npm run tslint
-```
-
-Runs [tslint](https://www.npmjs.com/package/tslint)     in the project and automatically fixes your prgramming-issues.
-
-```bash
-npm run prettier
-```
-
-Runs [prettier](https://www.npmjs.com/package/prettier) in the project and automatically fixes your formatting-issues.
-
-### [git-hooks](https://git-scm.com/book/en/v2/Customizing-Git-Git-Hooks)
-
-This project uses [husky](https://www.npmjs.com/package/husky) and [lint-staged](https://www.npmjs.com/package/lint-staged) to run `tslint` and `prettier` on staged files in a `pre-commit` phase, so that only clean code is checked-in.
-
-### [aws-cdk](https://aws.amazon.com/cdk)
-
-Cloud-deployments/-removals are done with the `aws-cdk`.
-
-#### `npm run deploy:{ENV}`
-
-```bash
-npm run deploy:test # Deploys the backend in the test-env.
-npm run deploy:prod # ...
-```
-
-**Tip:**
-For CI/CD append `approval` flag: `npm run deploy:test -- --require-approval never`. See [here](https://docs.aws.amazon.com/cdk/latest/guide/tools.html).
-
-#### `npm run remove:{ENV}`
-
-```bash
-npm run remove:test # Removes the backend in the test-env.
-npm run remove:prod # ...
-```
-
-**Tip:**
-For CI/CD append `force` flag: `npm run remove:test -- --force`. See [here](https://docs.aws.amazon.com/cdk/latest/guide/tools.html).
-
-### [aws-sam](https://aws.amazon.com/serverless/sam) and aws-cdk?
-
-For more info how to test locally with `aws-sam` and `aws-cdk` please refer to the following [link](https://docs.aws.amazon.com/cdk/latest/guide/tools.html#sam).
-
-```bash
-cdk synth --no-staging > template.yaml # ---> Depends on 'npm run bundle'
-sam local invoke createCustomerFunctionXXXXXXXX --event domains/customer/events/create-event.json
-```
-
-Alternatively, you can also run:
-
-```bash
-cdk synth --no-staging > template.yaml # ---> Depends on 'npm run bundle'
-sam local start-api
-```
-
-`aws-sam` automatically finds any lambda-functions within your `template.yaml` which have HTTP event-sources defined. Then, it mounts them at the defined HTTP paths.
-
-## Further links
-
-For more info how to setup and build serverless projects please refer to the following links.
-
-- https://serverless-stack.com
+...

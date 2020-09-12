@@ -1,0 +1,17 @@
+{
+  "name": "@lambda-blueprint/handover",
+  "private": true,
+  "scripts": {
+    "test:intr": "jest /intr --passWithNoTests --setupFiles dotenv/config",
+    "test:unit": "jest /unit --passWithNoTests",
+    "clean": "rm -rf dist node_modules",
+    "bundle": "webpack --config webpack.js",
+    "prepare": "tsc"
+  },
+  "devDependencies": {
+    "@lambda-blueprint/test": "0.0.0"
+  },
+  "dependencies": {
+    "@lambda-blueprint/core": "0.0.0"
+  }
+}

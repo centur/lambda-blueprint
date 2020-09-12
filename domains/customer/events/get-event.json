@@ -1,7 +1,7 @@
 {
   "httpMethod": "GET",
   "headers": {},
-  "body": {},
+  "body": null,
   "path": "/customers/{id}",
   "pathParameters": {
     "id": "99448ca9-368d-4f23-a5e6-ce81f35c8157"

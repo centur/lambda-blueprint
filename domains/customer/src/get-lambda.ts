@@ -1,18 +1,23 @@
 import { APIGatewayProxyEvent, APIGatewayProxyResult } from "aws-lambda";
-import { CorsReqHeader, withCors, handleGetError, toApiGatewayProxyResult } from "@serverless-blueprint/core";
-import { Service } from "./service";
+import { assertNotNull, handleError } from "@lambda-blueprint/core";
+import { createService } from "./utils/service-factory";
+import { Service } from "./utils/service";
+
+// Keep outside to re-use it for subsequent invocations.
+let service: Service;
 
 export async function entrypoint(
-  event: APIGatewayProxyEvent
+  event: APIGatewayProxyEvent,
 ): Promise<APIGatewayProxyResult> {
-  console.debug("Received event: %s", event);
-
-  const id = event.pathParameters!["id"];
-  const service = new Service();
-
-  return service
-    .getCustomer(id)
-    .then ((dto) => toApiGatewayProxyResult(200, dto))
-    .catch((reason) => handleGetError(reason))
-    .then ((result) => withCors(result, event.headers[CorsReqHeader.ORIGIN]));
+  console.debug("Received customer-event: %s", event);
+  try {
+    const pathParameters = assertNotNull(event.pathParameters);
+    if (!service) {
+      service = await createService();
+    }
+    const customerDto = await service.getCustomer(pathParameters.id);
+    return { statusCode: 200, body: JSON.stringify(customerDto) };
+  } catch (e) {
+    return handleError(e);
+  }
 }

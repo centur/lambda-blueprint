@@ -1,13 +1,3 @@
 {
-  "compilerOptions": {
-    "target": "es2020",
-    "esModuleInterop": true,
-    "module": "commonjs",
-    "moduleResolution": "node",
-    "resolveJsonModule": true,
-    "emitDecoratorMetadata":  true,
-    "experimentalDecorators": true,
-    "strictPropertyInitialization": false,
-    "strict": true
-  }
+  "compilerOptions": { "target": "es2019", "module": "commonjs", "strict": true }
 }

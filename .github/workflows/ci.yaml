@@ -1,0 +1,37 @@
+name: CI
+
+on: [push]
+
+jobs:
+  vm-job:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [12.x, 14.x]
+    services:
+      dynamodb:
+        image: amazon/dynamodb-local:1.13.3
+        ports:
+          - 8000:8000
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Uses node ${{ matrix.node-version }}
+        uses: actions/setup-node@v2-beta
+        with:
+          node-version: ${{ matrix.node-version }}
+
+      - run: npm install
+
+      - run: npm run build
+
+      - run: npm run test:unit
+      - run: npm run test:intr
+        env:
+          DYNAMODB_ENDPOINT: http://localhost:8000
+
+      - run: npm run bundle
+
+#     - run: npm run ...
+
+#     ...

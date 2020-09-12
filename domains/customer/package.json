@@ -1,15 +1,17 @@
 {
-  "name": "@serverless-blueprint/customer",
+  "name": "@lambda-blueprint/customer",
   "private": true,
   "scripts": {
-    "cleanup": "rm -rf dist node_modules",
-    "prepare": "tsc",
-    "test:unit": "jest unit --no-cache",
-    "test:int": "jest int --no-cache --testTimeout=10000 --setupFiles dotenv/config",
-    "test:e2e": "jest e2e --no-cache --testTimeout=10000"
+    "test:intr": "jest /intr --passWithNoTests --setupFiles dotenv/config",
+    "test:unit": "jest /unit --passWithNoTests",
+    "clean": "rm -rf dist node_modules",
+    "bundle": "webpack --config webpack.js",
+    "prepare": "tsc"
+  },
+  "devDependencies": {
+    "@lambda-blueprint/test": "0.0.0"
   },
   "dependencies": {
-    "@serverless-blueprint/core": "^0.0.0",
-    "uuid": "^8.0.0"
+    "@lambda-blueprint/core": "0.0.0"
   }
 }
