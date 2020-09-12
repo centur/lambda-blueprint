@@ -3,7 +3,7 @@
 [![Code-Style: prettier](https://img.shields.io/badge/code_style-prettier-ff69b4.svg)](https://github.com/prettier/prettier)
 [![Dependabot-Status](https://api.dependabot.com/badges/status?host=github&repo=Syy0n/lambda-blueprint)](https://dependabot.com)
 
-ddd-driven blueprint of a lambda-based http-backend, written in javascript/typescript.
+ddd-driven blueprint of a lambda-based http-backend, written in js/ts.
 
 ### 1. Prerequisites
 
