@@ -3,7 +3,7 @@
 [![prettier](https://img.shields.io/badge/code_style-prettier-ff69b4.svg)](https://github.com/prettier/prettier)
 [![d](https://api.dependabot.com/badges/status?host=github&repo=Syy0n/lambda-blueprint)](https://dependabot.com)
 
-ddd-driven blueprint of a lambda-based backend, written in js/ts - which illustrates a **REST**-, a **WS**- and a **GraphQL**-API.
+ddd-driven blueprint of a lambda-based backend, written in js/ts - which illustrates **REST**-, **WS**- and **GraphQL**-APIs.
 
 ### 1. Prerequisites
 
