@@ -48,6 +48,7 @@ GraphQL:
 curl -X POST   "https://<API-Id>.execute-api.<region>.amazonaws.com/v1/<resource>/graphql" -H "Authorization:<access_token>" -H "Content-Type: application/json" -d '{"query": "query {<customer|handover>(id: \"<Id>\") { id }}"}'
 curl -X POST   "https://<API-Id>.execute-api.<region>.amazonaws.com/v1/<resource>/graphql" -H "Authorization:<access_token>" -H "Content-Type: application/json" -d '{"query": "query {<customer|handover>(id: \"<Id>\") { id property1 }}"}'
 curl -X POST   "https://<API-Id>.execute-api.<region>.amazonaws.com/v1/<resource>/graphql" -H "Authorization:<access_token>" -H "Content-Type: application/json" -d '{"query": "query {<customer|handover>(id: \"<Id>\") { id property1 property2 }}"}'
+curl -X POST   "https://<API-Id>.execute-api.<region>.amazonaws.com/v1/<resource>/graphql" -H "Authorization:<access_token>" -H "Content-Type: application/json" -d '{"query": "query {<customer|handover>(id: \"<Id>\") { id property1 property2 property3 }}"}'
 ...
 ```
 
