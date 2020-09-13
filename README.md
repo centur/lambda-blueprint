@@ -1,23 +1,19 @@
 # lambda-blueprint
 
-[![Code-Style: prettier](https://img.shields.io/badge/code_style-prettier-ff69b4.svg)](https://github.com/prettier/prettier)
-[![Dependabot-Status](https://api.dependabot.com/badges/status?host=github&repo=Syy0n/lambda-blueprint)](https://dependabot.com)
+[![prettier](https://img.shields.io/badge/code_style-prettier-ff69b4.svg)](https://github.com/prettier/prettier)
+[![d](https://api.dependabot.com/badges/status?host=github&repo=Syy0n/lambda-blueprint)](https://dependabot.com)
 
-ddd-driven blueprint of a lambda-based http-/crud-backend, written in js/ts.
+ddd-driven blueprint of a lambda-based backend, written in js/ts - which provides a REST-, a WS- as well as a GraphQL-API.
 
 ### 1. Prerequisites
 
 - [node.js](https://nodejs.org/en/download)
 - [aws-cli](https://docs.aws.amazon.com/cli/index.html)
+- [aws-cdk](https://docs.aws.amazon.com/cdk/index.html)
 
 ---
 
-- [Bootstrapping the aws-cdk:](https://docs.aws.amazon.com/cdk/latest/guide/bootstrapping.html)
-```
-cdk bootstrap
-```
-
-### 2. How to create the API?
+### 2. How to create the APIs?
 
 ```
 1. npm install
@@ -27,20 +23,27 @@ cdk bootstrap
 5. npm run bundle
 6. npm run deploy:<env> (env = qa | prod)
 7. npm run remove:<env> (env = qa | prod)
+x. npm run clean
 ...
 ```
 
-### 3. How to invoke the API?
+### 3. How to invoke the APIs?
 
 ```
 1. Get access_token (m2m-communication)
 curl -X POST --user <clientId>:<clientSecret> "https://<domain>.auth.<region>.amazoncognito.com/oauth2/token?grant_type=client_credentials" -H "Content-Type: application/x-www-form-urlencoded"
 
-2. Use access_token (m2m-communication)
-curl -X POST   "https://<API-Id>.execute-api.<region>.amazonaws.com/v1/<resource>"        -H "Authorization:<access_token>" -H "Content-Type: application/json" -d "{<payload>}" (domains/<domain>/src/dtos/create-dto.ts)
-curl -X DELETE "https://<API-Id>.execute-api.<region>.amazonaws.com/v1/<resource>/<uuid>" -H "Authorization:<access_token>"
-curl -X PUT    "https://<API-Id>.execute-api.<region>.amazonaws.com/v1/<resource>/<uuid>" -H "Authorization:<access_token>" -H "Content-Type: application/json" -d "{<payload>}" (domains/<domain>/src/dtos/update-dto.ts)
-curl -X GET    "https://<API-Id>.execute-api.<region>.amazonaws.com/v1/<resource>/<uuid>" -H "Authorization:<access_token>"
+2. REST:
+curl -X POST   "https://<API-Id>.execute-api.<region>.amazonaws.com/v1/<resource>"      -H "Authorization:<access_token>" -H "Content-Type: application/json" -d "<body>" (domains/<domain>/src/dtos/create-dto.ts)
+curl -X DELETE "https://<API-Id>.execute-api.<region>.amazonaws.com/v1/<resource>/<Id>" -H "Authorization:<access_token>"
+curl -X PUT    "https://<API-Id>.execute-api.<region>.amazonaws.com/v1/<resource>/<Id>" -H "Authorization:<access_token>" -H "Content-Type: application/json" -d "<body>" (domains/<domain>/src/dtos/update-dto.ts)
+curl -X GET    "https://<API-Id>.execute-api.<region>.amazonaws.com/v1/<resource>/<Id>" -H "Authorization:<access_token>"
+
+3. WS:
+...
+
+4. GraphQL:
+...
 ```
 
 ### 4. Resources
