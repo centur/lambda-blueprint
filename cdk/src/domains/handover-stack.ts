@@ -10,9 +10,8 @@ export class HandoverStack extends cdk.Stack {
   constructor(scope: cdk.App, props: DomainStackProps, distPath: string) {
     super(scope, `${props.env}-handover-stack`);
 
-    const restApi        = props.restApi;
-    const restAuthorizer = props.restAuthorizer;
-
+    const restApi              = props.restApi;
+    const restAuthorizer       = props.restAuthorizer;
     const readAccessOAuthScope = props.readAccessOAuthScope.scopeName;
     const fullAccessOAuthScope = props.fullAccessOAuthScope.scopeName;
 
