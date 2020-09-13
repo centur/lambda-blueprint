@@ -4,9 +4,8 @@ import * as cdk from "@aws-cdk/core";
 import { SharedStackProps } from "./interfaces/shared-stack-props";
 
 export class ApiGatewayStack extends cdk.Stack {
-  restApi:        apigateway.RestApi;
-  restAuthorizer: apigateway.CfnAuthorizer;
-
+  restApi:              apigateway.RestApi;
+  restAuthorizer:       apigateway.CfnAuthorizer;
   readAccessOAuthScope: cognito.OAuthScope;
   fullAccessOAuthScope: cognito.OAuthScope;
 
