@@ -1,9 +1,7 @@
 .idea/
+cdk.out/
 
 coverage/
-
-template.yaml
-cdk.out/
 
 node_modules/
 dist/

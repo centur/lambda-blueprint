@@ -7,8 +7,8 @@ export class ApiGatewayStack extends cdk.Stack {
   restApi:        apigateway.RestApi;
   restAuthorizer: apigateway.CfnAuthorizer;
 
-  readAccess: cognito.OAuthScope;
-  fullAccess: cognito.OAuthScope;
+  readAccessOAuthScope: cognito.OAuthScope;
+  fullAccessOAuthScope: cognito.OAuthScope;
 
   constructor(scope: cdk.App, props: SharedStackProps) {
     super(scope, `${props.env}-api-gateway-stack`);
@@ -28,8 +28,8 @@ export class ApiGatewayStack extends cdk.Stack {
         { scopeName: "fullAccess", scopeDescription: "fullAccess" },
       ],
     });
-    this.readAccess = cognito.OAuthScope.custom(`${userPoolResourceServer.name}/readAccess`);
-    this.fullAccess = cognito.OAuthScope.custom(`${userPoolResourceServer.name}/fullAccess`);
+    this.readAccessOAuthScope = cognito.OAuthScope.custom(`${userPoolResourceServer.name}/readAccess`);
+    this.fullAccessOAuthScope = cognito.OAuthScope.custom(`${userPoolResourceServer.name}/fullAccess`);
     userPool.addDomain(`${props.env}-user-pool-domain`, { cognitoDomain: { domainPrefix: `${props.env}-api` } });
 
     userPool.addClient(`${props.env}-read-access-client`, {
@@ -37,7 +37,8 @@ export class ApiGatewayStack extends cdk.Stack {
       oAuth: {
         flows:  { clientCredentials: true },
         scopes: [
-          this.readAccess,
+          this.readAccessOAuthScope,
+          // ...
         ],
       },
     });
@@ -46,8 +47,8 @@ export class ApiGatewayStack extends cdk.Stack {
       oAuth: {
         flows:  { clientCredentials: true },
         scopes: [
-          this.readAccess,
-          this.fullAccess,
+          this.readAccessOAuthScope,
+          this.fullAccessOAuthScope,
         ],
       },
     });

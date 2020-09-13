@@ -5,7 +5,7 @@ export const createTable = async (
   hashKeyName: string,
   hashKeyType: DynamoDB.ScalarAttributeType,
 ): Promise<void> => {
-  const createTableInput: DynamoDB.CreateTableInput = { // Todo
+  const createTableInput: DynamoDB.CreateTableInput = {
     TableName:            tableName,
     KeySchema:            [{ AttributeName: hashKeyName, KeyType: "HASH" }],
     AttributeDefinitions: [{ AttributeName: hashKeyName, AttributeType: hashKeyType }],

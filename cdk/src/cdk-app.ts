@@ -17,7 +17,7 @@ const apiGatewayStack = new ApiGatewayStack(app, sharedStackProps);
 // ...
 
 // Build dependencies
-const apiGatewayStackDependency: ApiGatewayStackDependency = { restApi: apiGatewayStack.restApi, restAuthorizer: apiGatewayStack.restAuthorizer, readAccess: apiGatewayStack.readAccess, fullAccess: apiGatewayStack.fullAccess };
+const apiGatewayStackDependency: ApiGatewayStackDependency = { restApi: apiGatewayStack.restApi, restAuthorizer: apiGatewayStack.restAuthorizer, readAccessOAuthScope: apiGatewayStack.readAccessOAuthScope, fullAccessOAuthScope: apiGatewayStack.fullAccessOAuthScope };
 // ...
 
 new CustomerStack(app, { ...sharedStackProps, ...apiGatewayStackDependency }, "domains/customer/dist");

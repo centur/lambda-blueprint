@@ -10,9 +10,9 @@ export class CrudRepository<T extends Entity> {
   constructor(tableName: string, options?: DynamoDB.Types.ClientConfiguration) {
     const https = require("https");
     const agent = new https.Agent({ keepAlive: true });
-    const eendpoint = process.env.DYNAMODB_ENDPOINT;
+    const dendpoint = process.env.DYNAMODB_ENDPOINT;
     const tmpOptions: DynamoDB.Types.ClientConfiguration = {}; // Todo
-    if (eendpoint) tmpOptions.endpoint    = eendpoint;
+    if (dendpoint) tmpOptions.endpoint    = dendpoint;
     else           tmpOptions.httpOptions = { agent };
 
     this.documentClient = new DynamoDB.DocumentClient(tmpOptions);

@@ -13,8 +13,8 @@ export class HandoverStack extends cdk.Stack {
     const restApi        = props.restApi;
     const restAuthorizer = props.restAuthorizer;
 
-    const readAccess     = props.readAccess.scopeName;
-    const fullAccess     = props.fullAccess.scopeName;
+    const readAccessOAuthScope = props.readAccessOAuthScope.scopeName;
+    const fullAccessOAuthScope = props.fullAccessOAuthScope.scopeName;
 
     const dynamodbTable = new dynamodb.Table(this, "handovers", {
       tableName: `${props.env}-handovers`,
@@ -96,18 +96,18 @@ export class HandoverStack extends cdk.Stack {
     const handovers = restApi.root.addResource("handovers");
 
     const createIntegration = new apigateway.LambdaIntegration(createLambdaContext.funcAlias);
-    handovers.addMethod("POST", createIntegration, { ...methodOptions, authorizationScopes: [fullAccess] });
+    handovers.addMethod("POST", createIntegration, { ...methodOptions, authorizationScopes: [fullAccessOAuthScope] });
 
     const handover = handovers.addResource("{id}");
 
     const deleteIntegration = new apigateway.LambdaIntegration(deleteLambdaContext.funcAlias);
-    handover.addMethod("DELETE", deleteIntegration, { ...methodOptions, authorizationScopes: [fullAccess] });
+    handover.addMethod("DELETE", deleteIntegration, { ...methodOptions, authorizationScopes: [fullAccessOAuthScope] });
 
     const getIntegration = new apigateway.LambdaIntegration(getLambdaContext.funcAlias);
-    handover.addMethod("GET", getIntegration, { ...methodOptions, authorizationScopes: [readAccess] });
+    handover.addMethod("GET", getIntegration, { ...methodOptions, authorizationScopes: [readAccessOAuthScope] });
 
     const updateIntegration = new apigateway.LambdaIntegration(updateLambdaContext.funcAlias);
-    handover.addMethod("PUT", updateIntegration, { ...methodOptions, authorizationScopes: [fullAccess] });
+    handover.addMethod("PUT", updateIntegration, { ...methodOptions, authorizationScopes: [fullAccessOAuthScope] });
 
     handovers.addCorsPreflight({
       allowOrigins: apigateway.Cors.ALL_ORIGINS, // <--- Todo: Restrict?
