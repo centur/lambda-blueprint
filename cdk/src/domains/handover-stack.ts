@@ -29,8 +29,6 @@ export class HandoverStack extends cdk.Stack {
     environment[Keys.TABLE_NAME] = dynamodbTable.tableName;
     // ...
 
-    // Todo: build ssm-role and attach it ...
-
     const lambdaApplication = new codedeploy.LambdaApplication(this, `${props.env}-handover-stack`);
 
     const propertiies = {

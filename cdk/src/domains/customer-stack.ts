@@ -29,8 +29,6 @@ export class CustomerStack extends cdk.Stack {
     environment[Keys.TABLE_NAME] = dynamodbTable.tableName;
     // ...
 
-    // Todo: build ssm-role and attach it ...
-
     const lambdaApplication = new codedeploy.LambdaApplication(this, `${props.env}-customer-stack`);
 
     const propertiies = {
