@@ -12,9 +12,7 @@ export async function entrypoint(
   console.debug("Received handover-event: %s", event);
   try {
     const pathParameters = assertNotNull(event.pathParameters);
-    if (!service) {
-      service = await createService();
-    }
+    if (!service) { service = await createService(); }
     await service.deleteHandover(pathParameters.id);
     return { statusCode: 204, body: "" };
   } catch (e) {

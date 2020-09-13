@@ -8,10 +8,7 @@ export const Customer = t.intersection([
   t.strict({
     id:        t.string, // Partition-Key
     property1: t.string,
-    property2: t.strict({
-      property2_1: t.string,
-      property2_2: t.string,
-    }),
+    property2: t.string,
   }),
 ]);
 

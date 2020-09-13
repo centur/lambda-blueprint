@@ -12,11 +12,10 @@ export async function entrypoint(
   console.debug("Received customer-event: %s", event);
   try {
     const pathParameters = assertNotNull(event.pathParameters);
-    if (!service) {
-      service = await createService();
-    }
-    const customerDto = await service.getCustomer(pathParameters.id);
-    return { statusCode: 200, body: JSON.stringify(customerDto) };
+    if (!service) { service = await createService(); }
+
+    const dto = await service.getCustomer(pathParameters.id);
+    return { statusCode: 200, body: JSON.stringify(dto) };
   } catch (e) {
     return handleError(e);
   }

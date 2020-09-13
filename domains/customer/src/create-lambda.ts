@@ -14,9 +14,7 @@ export async function entrypoint(
   console.debug("Received customer-event: %s", event);
   try {
     const body = assertNotNull(event.body);
-    if (!service) {
-      service = await createService();
-    }
+    if (!service) { service = await createService(); }
     const createDto = JSON.parse(body);
     const either = CreateDto.decode(createDto);
     if (isRight(either)) {

@@ -15,9 +15,7 @@ export async function entrypoint(
   try {
     const pathParameters = assertNotNull(event.pathParameters);
     const body           = assertNotNull(event.body);
-    if (!service) {
-      service = await createService();
-    }
+    if (!service) { service = await createService(); }
     const updateDto = JSON.parse(body);
     const either = UpdateDto.decode(updateDto);
     if (isRight(either)) {

@@ -12,11 +12,10 @@ export async function entrypoint(
   console.debug("Received handover-event: %s", event);
   try {
     const pathParameters = assertNotNull(event.pathParameters);
-    if (!service) {
-      service = await createService();
-    }
-    const handoverDto = await service.getHandover(pathParameters.id);
-    return { statusCode: 200, body: JSON.stringify(handoverDto) };
+    if (!service) { service = await createService(); }
+
+    const dto = await service.getHandover(pathParameters.id);
+    return { statusCode: 200, body: JSON.stringify(dto) };
   } catch (e) {
     return handleError(e);
   }
