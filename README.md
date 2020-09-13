@@ -34,15 +34,19 @@ x. npm run clean
 curl -X POST --user <clientId>:<clientSecret> "https://<domain>.auth.<region>.amazoncognito.com/oauth2/token?grant_type=client_credentials" -H "Content-Type: application/x-www-form-urlencoded"
 
 2. REST:
-curl -X POST   "https://<API-Id>.execute-api.<region>.amazonaws.com/v1/<resource>"      -H "Authorization:<access_token>" -H "Content-Type: application/json" -d "<body>" (domains/<domain>/src/dtos/create-dto.ts)
-curl -X DELETE "https://<API-Id>.execute-api.<region>.amazonaws.com/v1/<resource>/<Id>" -H "Authorization:<access_token>"
-curl -X PUT    "https://<API-Id>.execute-api.<region>.amazonaws.com/v1/<resource>/<Id>" -H "Authorization:<access_token>" -H "Content-Type: application/json" -d "<body>" (domains/<domain>/src/dtos/update-dto.ts)
-curl -X GET    "https://<API-Id>.execute-api.<region>.amazonaws.com/v1/<resource>/<Id>" -H "Authorization:<access_token>"
+curl -X POST   "https://<API-Id>.execute-api.<region>.amazonaws.com/v1/<resource>"         -H "Authorization:<access_token>" -H "Content-Type: application/json" -d "<body>" (domains/<domain>/src/dtos/create-dto.ts)
+curl -X DELETE "https://<API-Id>.execute-api.<region>.amazonaws.com/v1/<resource>/<Id>"    -H "Authorization:<access_token>"
+curl -X PUT    "https://<API-Id>.execute-api.<region>.amazonaws.com/v1/<resource>/<Id>"    -H "Authorization:<access_token>" -H "Content-Type: application/json" -d "<body>" (domains/<domain>/src/dtos/update-dto.ts)
+curl -X GET    "https://<API-Id>.execute-api.<region>.amazonaws.com/v1/<resource>/<Id>"    -H "Authorization:<access_token>"
 
 3. WS:
+TBD
 ...
 
 4. GraphQL:
+curl -X POST   "https://<API-Id>.execute-api.<region>.amazonaws.com/v1/<resource>/graphql" -H "Authorization:<access_token>" -H "Content-Type: application/json" -d '{"query": "query {<customer|handover>(id: \"<Id>\") { id }}"}'
+curl -X POST   "https://<API-Id>.execute-api.<region>.amazonaws.com/v1/<resource>/graphql" -H "Authorization:<access_token>" -H "Content-Type: application/json" -d '{"query": "query {<customer|handover>(id: \"<Id>\") { id property1 }}"}'
+curl -X POST   "https://<API-Id>.execute-api.<region>.amazonaws.com/v1/<resource>/graphql" -H "Authorization:<access_token>" -H "Content-Type: application/json" -d '{"query": "query {<customer|handover>(id: \"<Id>\") { id property1 property2 }}"}'
 ...
 ```
 

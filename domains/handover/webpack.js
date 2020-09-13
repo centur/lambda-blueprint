@@ -2,10 +2,12 @@ const webpack = require("../../webpack.js");
 
 module.exports = {
   entry: {
-    "create-lambda": "./dist/create-lambda.js",
-    "delete-lambda": "./dist/delete-lambda.js",
-    "get-lambda":    "./dist/get-lambda.js",
-    "update-lambda": "./dist/update-lambda.js",
+    "create-lambda":  "./dist/create-lambda.js",
+    "delete-lambda":  "./dist/delete-lambda.js",
+    "get-lambda":     "./dist/get-lambda.js",
+    "update-lambda":  "./dist/update-lambda.js",
+
+    "graphql-lambda": "./dist/graphql-lambda.js",
   },
   output: {
     libraryTarget: "commonjs",

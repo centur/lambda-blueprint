@@ -9,7 +9,7 @@ import { ApiGatewayStack } from "./api-gateway-stack";
 const app = new cdk.App({});
 
 const env = app.node.tryGetContext("ENV");
-// if (!env) { throw new Error("You missed a value for 'ENV'. Run: 'cdk <command> -c ENV=<value>'"); }
+if (!env) { throw new Error("You missed a value for 'ENV'. Run: 'cdk <command> -c ENV=<value>'"); }
 
 const sharedStackProps: SharedStackProps = { env };
 

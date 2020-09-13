@@ -39,7 +39,7 @@ export class HandoverStack extends cdk.Stack {
       deploymentConfig: codedeploy.LambdaDeploymentConfig.CANARY_10PERCENT_15MINUTES,
     };
 
-    const createLambdaContext = lambdaWithAliasAndDeploymentGroup(
+    const createLambdaContext  = lambdaWithAliasAndDeploymentGroup(
       this,
       "create-lambda",
       "create-lambda-bundle.entrypoint",
@@ -50,7 +50,7 @@ export class HandoverStack extends cdk.Stack {
       props.env,
     );
 
-    const deleteLambdaContext = lambdaWithAliasAndDeploymentGroup(
+    const deleteLambdaContext  = lambdaWithAliasAndDeploymentGroup(
       this,
       "delete-lambda",
       "delete-lambda-bundle.entrypoint",
@@ -61,7 +61,7 @@ export class HandoverStack extends cdk.Stack {
       props.env,
     );
 
-    const getLambdaContext    = lambdaWithAliasAndDeploymentGroup(
+    const getLambdaContext     = lambdaWithAliasAndDeploymentGroup(
       this,
       "get-lambda",
       "get-lambda-bundle.entrypoint",
@@ -72,12 +72,23 @@ export class HandoverStack extends cdk.Stack {
       props.env,
     );
 
-    const updateLambdaContext = lambdaWithAliasAndDeploymentGroup(
+    const updateLambdaContext  = lambdaWithAliasAndDeploymentGroup(
       this,
       "update-lambda",
       "update-lambda-bundle.entrypoint",
       distPath,
       "update-lambda-bundle.js",
+      environment,
+      propertiies,
+      props.env,
+    );
+
+    const graphqlLambdaContext = lambdaWithAliasAndDeploymentGroup(
+      this,
+      "graphql-lambda",
+      "graphql-lambda-bundle.entrypoint",
+      distPath,
+      "graphql-lambda-bundle.js",
       environment,
       propertiies,
       props.env,
@@ -108,6 +119,11 @@ export class HandoverStack extends cdk.Stack {
 
     const updateIntegration = new apigateway.LambdaIntegration(updateLambdaContext.funcAlias);
     handover.addMethod("PUT", updateIntegration, { ...methodOptions, authorizationScopes: [fullAccessOAuthScope] });
+
+    const graphql = handovers.addResource("graphql");
+
+    const graphqlIntegration = new apigateway.LambdaIntegration(graphqlLambdaContext.funcAlias);
+    graphql.addMethod("POST", graphqlIntegration);
 
     handovers.addCorsPreflight({
       allowOrigins: apigateway.Cors.ALL_ORIGINS, // <--- Todo: Restrict?
