@@ -35,20 +35,14 @@ export class ApiGatewayStack extends cdk.Stack {
       generateSecret: true,
       oAuth: {
         flows:  { clientCredentials: true },
-        scopes: [
-          this.readAccessOAuthScope,
-          // ...
-        ],
+        scopes: [ this.readAccessOAuthScope ],
       },
     });
     userPool.addClient(`${props.env}-full-access-client`, {
       generateSecret: true,
       oAuth: {
         flows:  { clientCredentials: true },
-        scopes: [
-          this.readAccessOAuthScope,
-          this.fullAccessOAuthScope,
-        ],
+        scopes: [ this.fullAccessOAuthScope ],
       },
     });
 

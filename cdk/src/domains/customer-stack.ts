@@ -1,10 +1,10 @@
+import { DomainStackProps } from "../interfaces/domain-stack-props";
+import { Keys } from "../../../domains/customer/src/utils/keys";
 import * as apigateway from "@aws-cdk/aws-apigateway";
 import * as codedeploy from "@aws-cdk/aws-codedeploy";
 import * as dynamodb from "@aws-cdk/aws-dynamodb";
-import * as cdk from "@aws-cdk/core";
-import { DomainStackProps } from "../interfaces/domain-stack-props";
-import { Keys } from "../../../domains/customer/src/utils/keys";
 import { lambdaWithAliasAndDeploymentGroup } from "./utils";
+import * as cdk from "@aws-cdk/core";
 
 export class CustomerStack extends cdk.Stack {
   constructor(scope: cdk.App, props: DomainStackProps, distPath: string) {
@@ -115,7 +115,7 @@ export class CustomerStack extends cdk.Stack {
     customer.addMethod("DELETE", deleteIntegration, { ...methodOptions, authorizationScopes: [fullAccessOAuthScope] });
 
     const getIntegration = new apigateway.LambdaIntegration(getLambdaContext.funcAlias);
-    customer.addMethod("GET", getIntegration, { ...methodOptions, authorizationScopes: [readAccessOAuthScope] });
+    customer.addMethod("GET", getIntegration, { ...methodOptions, authorizationScopes: [readAccessOAuthScope, fullAccessOAuthScope] });
 
     const updateIntegration = new apigateway.LambdaIntegration(updateLambdaContext.funcAlias);
     customer.addMethod("PUT", updateIntegration, { ...methodOptions, authorizationScopes: [fullAccessOAuthScope] });
