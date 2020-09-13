@@ -29,7 +29,7 @@ export class HandoverStack extends cdk.Stack {
     environment[Keys.TABLE_NAME] = dynamodbTable.tableName;
     // ...
 
-    const lambdaApplication = new codedeploy.LambdaApplication(this, `${props.env}-handover-stack`);
+    const lambdaApplication = new codedeploy.LambdaApplication(this, `${props.env}-handover-application`);
 
     const propertiies = {
       application:      lambdaApplication,
@@ -95,6 +95,7 @@ export class HandoverStack extends cdk.Stack {
     dynamodbTable.grantWriteData(deleteLambdaContext.func);
     dynamodbTable.grantReadData(getLambdaContext.func);
     dynamodbTable.grantReadWriteData(updateLambdaContext.func);
+    dynamodbTable.grantReadWriteData(graphqlLambdaContext.func);
 
     const methodOptions: apigateway.MethodOptions = {
       authorizationType: apigateway.AuthorizationType.COGNITO,
@@ -120,7 +121,7 @@ export class HandoverStack extends cdk.Stack {
     const graphql = handovers.addResource("graphql");
 
     const graphqlIntegration = new apigateway.LambdaIntegration(graphqlLambdaContext.funcAlias);
-    graphql.addMethod("POST", graphqlIntegration);
+    graphql.addMethod("POST", graphqlIntegration, { ...methodOptions, authorizationScopes: [fullAccessOAuthScope] });
 
     handovers.addCorsPreflight({
       allowOrigins: apigateway.Cors.ALL_ORIGINS, // <--- Todo: Restrict?
