@@ -33,6 +33,16 @@ const schema = new GraphQLSchema({
       },
     },
   }),
+  /*
+  mutation: new GraphQLObjectType({ // Todo
+    name: "Mutation",
+    fields: {
+      createCustomer: {},
+      updateCustomer: {},
+      deleteCustomer: {},
+    },
+  }),
+  */
 });
 
 export const entrypoint = async (event: APIGatewayProxyEvent): Promise<APIGatewayProxyResult> => {
