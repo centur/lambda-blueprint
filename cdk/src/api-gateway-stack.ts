@@ -33,17 +33,11 @@ export class ApiGatewayStack extends cdk.Stack {
 
     userPool.addClient(`${props.env}-read-access-client`, {
       generateSecret: true,
-      oAuth: {
-        flows:  { clientCredentials: true },
-        scopes: [ this.readAccessOAuthScope ],
-      },
+      oAuth: { flows: { clientCredentials: true }, scopes: [ this.readAccessOAuthScope ] },
     });
     userPool.addClient(`${props.env}-full-access-client`, {
       generateSecret: true,
-      oAuth: {
-        flows:  { clientCredentials: true },
-        scopes: [ this.fullAccessOAuthScope ],
-      },
+      oAuth: { flows: { clientCredentials: true }, scopes: [ this.fullAccessOAuthScope ] },
     });
 
     this.restAuthorizer = new apigateway.CfnAuthorizer(this, `${props.env}-authorizer`, {
