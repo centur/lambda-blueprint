@@ -29,7 +29,7 @@ export class ApiGatewayStack extends cdk.Stack {
     });
     this.readAccessOAuthScope = cognito.OAuthScope.custom(`${userPoolResourceServer.name}/readAccess`);
     this.fullAccessOAuthScope = cognito.OAuthScope.custom(`${userPoolResourceServer.name}/fullAccess`);
-    userPool.addDomain(`${props.env}-user-pool-domain`, { cognitoDomain: { domainPrefix: `${props.env}-api` } });
+    userPool.addDomain(`${props.env}-user-pool-domain`, { cognitoDomain: { domainPrefix: `${props.env}-authentication` } });
 
     userPool.addClient(`${props.env}-read-access-client`, {
       generateSecret: true,
