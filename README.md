@@ -30,10 +30,10 @@ x. npm run clean
 ### 3. How to invoke the APIs?
 
 ```
-1. Get access_token (M2M-communication)
+1. Get access_token (M2M-Communication)
 curl -X POST --user <clientId>:<clientSecret> "https://<domain>.auth.<region>.amazoncognito.com/oauth2/token?grant_type=client_credentials" -H "Content-Type: application/x-www-form-urlencoded"
 
-2. Use access_token (M2M-communication)
+2. Use access_token (M2M-Communication)
 
 WS:
 
