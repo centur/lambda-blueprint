@@ -38,15 +38,15 @@
     "//2": [
       "---------------> devDependencies for cdk"
     ],
-    "@aws-cdk/core": "^1.62.0",
-    "@aws-cdk/aws-codedeploy": "^1.62.0",
-    "@aws-cdk/aws-cognito": "^1.62.0",
-    "@aws-cdk/aws-iam": "^1.62.0",
-    "@aws-cdk/aws-wafv2": "^1.62.0",
-    "@aws-cdk/aws-lambda": "^1.62.0",
-    "@aws-cdk/aws-dynamodb": "^1.62.0",
-    "@aws-cdk/aws-apigateway": "^1.62.0",
-    "aws-cdk": "^1.62.0",
+    "@aws-cdk/core": "^1.63.0",
+    "@aws-cdk/aws-codedeploy": "^1.63.0",
+    "@aws-cdk/aws-cognito": "^1.63.0",
+    "@aws-cdk/aws-iam": "^1.63.0",
+    "@aws-cdk/aws-wafv2": "^1.63.0",
+    "@aws-cdk/aws-lambda": "^1.63.0",
+    "@aws-cdk/aws-dynamodb": "^1.63.0",
+    "@aws-cdk/aws-apigateway": "^1.63.0",
+    "aws-cdk": "^1.63.0",
     "//3": [
       "---------------> devDependencies for bundler"
     ],
