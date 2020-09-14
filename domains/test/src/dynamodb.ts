@@ -23,7 +23,7 @@ export const deleteTable = async (
   await dynamoDB.deleteTable(deleteTableInput).promise().catch((reason: any) => Promise.reject(reason));
 };
 
-const endpoint = process.env.DYNAMODB_ENDPOINT;
+const endpoint = process.env["DYNAMODB_ENDPOINT"];
 
 const options: DynamoDB.ClientConfiguration = {
   endpoint: endpoint,
