@@ -5,12 +5,12 @@ const typeDefs = `
     property2: String
   }
   
-  type CreateCustomerDto {
+  input CreateCustomerDto {
     property1: String
     property2: String
   }
   
-  type UpdateCustomerDto {
+  input UpdateCustomerDto {
     property1: String
     property2: String
   }

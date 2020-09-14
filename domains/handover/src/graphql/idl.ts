@@ -5,12 +5,12 @@ const typeDefs = `
     property2: String
   }
   
-  type CreateHandoverDto {
+  input CreateHandoverDto {
     property1: String
     property2: String
   }
   
-  type UpdateHandoverDto {
+  input UpdateHandoverDto {
     property1: String
     property2: String
   }
