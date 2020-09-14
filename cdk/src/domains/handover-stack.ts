@@ -80,22 +80,10 @@ export class HandoverStack extends cdk.Stack {
       props.env,
     );
 
-    const graphqlLambdaContext = lambdaWithAliasAndDeploymentGroup(
-      this,
-      "graphql-lambda",
-      "graphql-lambda-bundle.entrypoint",
-      distPath,
-      "graphql-lambda-bundle.js",
-      environment,
-      propertiies,
-      props.env,
-    );
-
     dynamodbTable.grantWriteData(createLambdaContext.func);
     dynamodbTable.grantWriteData(deleteLambdaContext.func);
     dynamodbTable.grantReadData(getLambdaContext.func);
     dynamodbTable.grantReadWriteData(updateLambdaContext.func);
-    dynamodbTable.grantReadWriteData(graphqlLambdaContext.func);
 
     const methodOptions: apigateway.MethodOptions = {
       authorizationType: apigateway.AuthorizationType.COGNITO,
@@ -117,11 +105,6 @@ export class HandoverStack extends cdk.Stack {
 
     const updateIntegration = new apigateway.LambdaIntegration(updateLambdaContext.funcAlias);
     handover.addMethod("PUT", updateIntegration, { ...methodOptions, authorizationScopes: [fullAccessOAuthScope] });
-
-    const graphql = handovers.addResource("graphql");
-
-    const graphqlIntegration = new apigateway.LambdaIntegration(graphqlLambdaContext.funcAlias);
-    graphql.addMethod("POST", graphqlIntegration, { ...methodOptions, authorizationScopes: [fullAccessOAuthScope] });
 
     handovers.addCorsPreflight({
       allowOrigins: apigateway.Cors.ALL_ORIGINS, // <--- Todo: Restrict?

@@ -80,22 +80,10 @@ export class CustomerStack extends cdk.Stack {
       props.env,
     );
 
-    const graphqlLambdaContext = lambdaWithAliasAndDeploymentGroup(
-      this,
-      "graphql-lambda",
-      "graphql-lambda-bundle.entrypoint",
-      distPath,
-      "graphql-lambda-bundle.js",
-      environment,
-      propertiies,
-      props.env,
-    );
-
     dynamodbTable.grantWriteData(createLambdaContext.func);
     dynamodbTable.grantWriteData(deleteLambdaContext.func);
     dynamodbTable.grantReadData(getLambdaContext.func);
     dynamodbTable.grantReadWriteData(updateLambdaContext.func);
-    dynamodbTable.grantReadWriteData(graphqlLambdaContext.func);
 
     const methodOptions: apigateway.MethodOptions = {
       authorizationType: apigateway.AuthorizationType.COGNITO,
@@ -117,11 +105,6 @@ export class CustomerStack extends cdk.Stack {
 
     const updateIntegration = new apigateway.LambdaIntegration(updateLambdaContext.funcAlias);
     customer.addMethod("PUT", updateIntegration, { ...methodOptions, authorizationScopes: [fullAccessOAuthScope] });
-
-    const graphql = customers.addResource("graphql");
-
-    const graphqlIntegration = new apigateway.LambdaIntegration(graphqlLambdaContext.funcAlias);
-    graphql.addMethod("POST", graphqlIntegration, { ...methodOptions, authorizationScopes: [fullAccessOAuthScope] });
 
     customers.addCorsPreflight({
       allowOrigins: apigateway.Cors.ALL_ORIGINS, // <--- Todo: Restrict?
