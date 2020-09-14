@@ -6,8 +6,6 @@ module.exports = {
     "delete-lambda":  "./dist/delete-lambda.js",
     "get-lambda":     "./dist/get-lambda.js",
     "update-lambda":  "./dist/update-lambda.js",
-
-    "graphql-lambda": "./dist/graphql-lambda.js",
   },
   output: {
     libraryTarget: "commonjs",
