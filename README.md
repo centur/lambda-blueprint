@@ -3,7 +3,7 @@
 [![prettier](https://img.shields.io/badge/code_style-prettier-ff69b4.svg)](https://github.com/prettier/prettier)
 [![d](https://api.dependabot.com/badges/status?host=github&repo=Syy0n/lambda-blueprint)](https://dependabot.com)
 
-ddd-driven blueprint of a lambda-based backend, written in js/ts - which illustrates a **REST**- and a **GraphQL**-API.
+ddd-driven blueprint of a lambda-based http-backend, written in js/ts.
 
 ### 1. Prerequisites
 
@@ -34,19 +34,10 @@ x. npm run clean
 curl -X POST --user <clientId>:<clientSecret> "https://<domain>.auth.<region>.amazoncognito.com/oauth2/token?grant_type=client_credentials" -H "Content-Type: application/x-www-form-urlencoded"
 
 2. Use access_token (M2M-Communication)
-
-REST:
-curl -X POST   "https://<API-Id>.execute-api.<region>.amazonaws.com/v1/<resource>"         -H "Authorization:<access_token>" -H "Content-Type: application/json" -d "<body>" (domains/<domain>/src/dtos/create-dto.ts)
-curl -X DELETE "https://<API-Id>.execute-api.<region>.amazonaws.com/v1/<resource>/<Id>"    -H "Authorization:<access_token>"
-curl -X PUT    "https://<API-Id>.execute-api.<region>.amazonaws.com/v1/<resource>/<Id>"    -H "Authorization:<access_token>" -H "Content-Type: application/json" -d "<body>" (domains/<domain>/src/dtos/update-dto.ts)
-curl -X GET    "https://<API-Id>.execute-api.<region>.amazonaws.com/v1/<resource>/<Id>"    -H "Authorization:<access_token>"
-...
-
-GraphQL:
-curl -X POST   "https://<API-Id>.execute-api.<region>.amazonaws.com/v1/<resource>/graphql" -H "Authorization:<access_token>" -H "Content-Type: application/json" -d '{"query": "query {<customer|handover>(id: \"<Id>\") { id }}"}'
-curl -X POST   "https://<API-Id>.execute-api.<region>.amazonaws.com/v1/<resource>/graphql" -H "Authorization:<access_token>" -H "Content-Type: application/json" -d '{"query": "query {<customer|handover>(id: \"<Id>\") { id property1 }}"}'
-curl -X POST   "https://<API-Id>.execute-api.<region>.amazonaws.com/v1/<resource>/graphql" -H "Authorization:<access_token>" -H "Content-Type: application/json" -d '{"query": "query {<customer|handover>(id: \"<Id>\") { id property1 property2 }}"}'
-curl -X POST   "https://<API-Id>.execute-api.<region>.amazonaws.com/v1/<resource>/graphql" -H "Authorization:<access_token>" -H "Content-Type: application/json" -d '{"query": "query {<customer|handover>(id: \"<Id>\") { id property1 property2 property3 }}"}'
+curl -X POST   "https://<API-Id>.execute-api.<region>.amazonaws.com/v1/<resource>"      -H "Authorization:<access_token>" -H "Content-Type: application/json" -d "<body>" (domains/<domain>/src/dtos/create-dto.ts)
+curl -X DELETE "https://<API-Id>.execute-api.<region>.amazonaws.com/v1/<resource>/<Id>" -H "Authorization:<access_token>"
+curl -X PUT    "https://<API-Id>.execute-api.<region>.amazonaws.com/v1/<resource>/<Id>" -H "Authorization:<access_token>" -H "Content-Type: application/json" -d "<body>" (domains/<domain>/src/dtos/update-dto.ts)
+curl -X GET    "https://<API-Id>.execute-api.<region>.amazonaws.com/v1/<resource>/<Id>" -H "Authorization:<access_token>"
 ...
 ```
 
