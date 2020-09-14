@@ -8,7 +8,6 @@ export const withCors = (
   result: APIGatewayProxyResult,
   origin: string,
   allowedOrigins: string[],
-): APIGatewayProxyResult => {
-  // Todo
+): APIGatewayProxyResult => { // Todo
   return result;
 };
