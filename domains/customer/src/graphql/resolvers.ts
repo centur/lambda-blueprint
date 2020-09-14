@@ -1,29 +1,25 @@
-import { Customer } from "./types";
+import { Customer, CreateCustomerDto, UpdateCustomerDto } from "./types";
 import { v4 as uuidv4 } from "uuid";
 
 let fakeDB: Customer[] = [];
 
 const resolvers = {
   Query: {
-    // @ts-ignore
-    getCustomer: (_, { id }): Customer | undefined => {
+    getCustomer: (_: any, { id }: { id: string }): Customer | undefined => {
       return fakeDB.find(value => value.id === id);
     },
   },
   Mutation: {
-    // @ts-ignore
-    createCustomer: (_, { dto }): Customer => {
+    createCustomer: (_: any, { dto }: { dto: CreateCustomerDto }): Customer => {
       const customer: Customer = { id: uuidv4(), ...dto };
       fakeDB.push(customer);
       return customer;
     },
-    // @ts-ignore
-    deleteCustomer: (_, { id }): Boolean => {
+    deleteCustomer: (_: any, { id }: { id: string }): Boolean => {
       fakeDB = fakeDB.filter(value => value.id !== id);
       return true;
     },
-    // @ts-ignore
-    updateCustomer: (_, { id, dto }): Customer => {
+    updateCustomer: (_: any, { id, dto }: { id: string, dto: UpdateCustomerDto }): Customer => {
       const index = fakeDB.findIndex(value => value.id === id);
       const customer = { ...fakeDB[index], ...dto };
       fakeDB[index] = customer;
