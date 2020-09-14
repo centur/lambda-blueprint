@@ -10,7 +10,6 @@ const resolvers = {
       return fakeDB.find(value => value.id === id);
     },
   },
-
   Mutation: {
     // @ts-ignore
     createHandover: (_, { dto }): Handover => {
