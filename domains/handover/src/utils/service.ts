@@ -1,9 +1,9 @@
 import { CrudRepository, Error404, deepMerge } from "@lambda-blueprint/core";
-import { v4 as uuidv4 } from "uuid";
-import { CreateDto } from "../dtos/create-dto";
-import { HandoverDto } from "../dtos/handover-dto";
-import { UpdateDto } from "../dtos/update-dto";
 import { Handover, toHandoverDto } from "../entities/handover";
+import { CreateDto } from "../dtos/create-dto";
+import { UpdateDto } from "../dtos/update-dto";
+import { HandoverDto } from "../dtos/handover-dto";
+import { v4 as uuidv4 } from "uuid";
 
 export class Service {
   constructor(
@@ -24,19 +24,19 @@ export class Service {
   }
 
   async deleteHandover(id: string): Promise<void> {
-    const keys: Partial<Handover> = { id };
+    const keys:  Partial<Handover> = { id };
     return this.crudRepository.delete(keys);
   }
 
   async getHandover(id: string): Promise<HandoverDto> {
-    const keys: Partial<Handover> = { id };
+    const keys:  Partial<Handover> = { id };
     const handover = await this.crudRepository.get(keys).catch((reason: any) => Promise.reject(reason));
     if (!handover) { throw new Error404(); }
     return toHandoverDto(handover);
   }
 
   async updateHandover(id: string, updateDto: UpdateDto): Promise<void> {
-    const keys: Partial<Handover> = { id };
+    const keys:  Partial<Handover> = { id };
     const handover = await this.crudRepository.get(keys).catch((reason: any) => Promise.reject(reason));
     if (!handover) { throw new Error404(); }
     handover.updatedAt = new Date().toISOString();
