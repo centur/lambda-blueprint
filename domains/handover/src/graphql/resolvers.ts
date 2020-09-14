@@ -1,26 +1,35 @@
 import { Handover } from "./types";
 import { v4 as uuidv4 } from "uuid";
 
-const fakeDB: Handover[] = [];
+let fakeDB: Handover[] = [];
 
 const resolvers = {
   Query: {
     // @ts-ignore
-    getHandover: async (_, { id }): Handover => {},
+    getHandover: (_, { id }): Handover | undefined => {
+      return fakeDB.find(value => value.id === id);
+    },
   },
 
   Mutation: {
     // @ts-ignore
-    createHandover: async (_, { dto }): Handover => {
-      const  handover: Handover = { id: uuidv4(), ...dto };
+    createHandover: (_, { dto }): Handover => {
+      const handover: Handover = { id: uuidv4(), ...dto };
       fakeDB.push(handover);
-      console.debug(fakeDB.length);
       return handover;
     },
     // @ts-ignore
-    deleteHandover: async (_, { id }): Boolean => {},
+    deleteHandover: (_, { id }): Boolean => {
+      fakeDB = fakeDB.filter(value => value.id !== id);
+      return true;
+    },
     // @ts-ignore
-    updateHandover: async (_, { id, dto }): Handover => {},
+    updateHandover: (_, { id, dto }): Handover => {
+      const index = fakeDB.findIndex(value => value.id === id);
+      const handover = { ...fakeDB[index], ...dto };
+      fakeDB[index] = handover;
+      return handover;
+    },
   },
 };
 

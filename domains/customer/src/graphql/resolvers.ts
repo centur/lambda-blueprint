@@ -1,26 +1,35 @@
 import { Customer } from "./types";
 import { v4 as uuidv4 } from "uuid";
 
-const fakeDB: Customer[] = [];
+let fakeDB: Customer[] = [];
 
 const resolvers = {
   Query: {
     // @ts-ignore
-    getCustomer: async (_, { id }): Customer => {},
+    getCustomer: (_, { id }): Customer | undefined => {
+      return fakeDB.find(value => value.id === id);
+    },
   },
 
   Mutation: {
     // @ts-ignore
-    createCustomer: async (_, { dto }): Customer => {
-      const  Customer: Customer = { id: uuidv4(), ...dto };
-      fakeDB.push(Customer);
-      console.debug(fakeDB.length);
-      return Customer;
+    createCustomer: (_, { dto }): Customer => {
+      const customer: Customer = { id: uuidv4(), ...dto };
+      fakeDB.push(customer);
+      return customer;
     },
     // @ts-ignore
-    deleteCustomer: async (_, { id }): Boolean => {},
+    deleteCustomer: (_, { id }): Boolean => {
+      fakeDB = fakeDB.filter(value => value.id !== id);
+      return true;
+    },
     // @ts-ignore
-    updateCustomer: async (_, { id, dto }): Customer => {},
+    updateCustomer: (_, { id, dto }): Customer => {
+      const index = fakeDB.findIndex(value => value.id === id);
+      const customer = { ...fakeDB[index], ...dto };
+      fakeDB[index] = customer;
+      return customer;
+    },
   },
 };
 
