@@ -22,7 +22,7 @@
     "remove:prod": "cdk destroy '*' -c ENV=prod"
   },
   "dependencies": {
-    "aws-sdk": "^2.751.0",
+    "aws-sdk": "^2.752.0",
     "fp-ts": "^2.8.2",
     "io-ts": "^2.2.10",
     "graphql": "^15.3.0",
