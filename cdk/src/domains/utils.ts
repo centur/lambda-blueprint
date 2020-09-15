@@ -13,6 +13,8 @@ export const lambdaWithAliasAndDeploymentGroup = (
   funAlias: lambda.Alias,
   fun:      lambda.Function,
 } => {
+  const deploymentConfig = codedeploy.LambdaDeploymentConfig.ALL_AT_ONCE; // Todo
+
   const fun = new lambda.Function(scope, `${env}-${id}`, {
     tracing:               lambda.Tracing.ACTIVE,
     runtime:               lambda.Runtime.NODEJS_12_X,
@@ -26,8 +28,8 @@ export const lambdaWithAliasAndDeploymentGroup = (
   } as any);
   new codedeploy.LambdaDeploymentGroup(scope, `${env}-${id}-deployment-group`, {
     ...lambdaDeploymentGroupProps,
-    deploymentConfig: codedeploy.LambdaDeploymentConfig.CANARY_10PERCENT_15MINUTES,
-    alias:            funAlias,
+    deploymentConfig,
+    alias:  funAlias,
   } as any);
   return {
     funAlias,
