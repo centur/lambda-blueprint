@@ -1,14 +1,18 @@
-// When express is up, open browser plus developer-console, and use:
+const createQuery = "mutation($dto: CreateHandoverDto!) { createHandover(dto: $dto) { id } }";
+const deleteQuery = "mutation($id: ID!) { deleteHandover($id: id) }";
+const getQuery    = "query($id: ID!) { getHandover(id: $id) { id property1 property2 } }";
+const updateQuery = "mutation($id: ID!, $dto: UpdateHandoverDto! { updateHandover(id: $id, dto: $dto) { id } })";
 
-fetch("/graphiql", {
-  method:  "POST",
-  headers: {
-    "Content-Type": "application/json",
-    "Accept":       "application/json",
-  },
-  body: JSON.stringify({ query: "{ getCustomer(id: \"<id>\") { id } }" }) // Todo
-})
-  .then((json) => json.json())
-  .then((body) => console.log("Body: %s", body));
+const request = async (body) => {
+  const json = await fetch("/graphql", {
+    method:  "POST",
+    headers: {
+      "Content-Type": "application/json",
+      "Accept":       "application/json",
+    },
+    body: JSON.stringify(body),
+  });
+  return json.json();
+};
 
 // ...
