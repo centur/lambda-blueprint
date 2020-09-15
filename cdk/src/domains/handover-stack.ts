@@ -3,6 +3,7 @@ import { Keys } from "../../../domains/handover/src/utils/keys";
 import * as apigateway from "@aws-cdk/aws-apigateway";
 import * as codedeploy from "@aws-cdk/aws-codedeploy";
 import * as dynamodb from "@aws-cdk/aws-dynamodb";
+import * as lambda from "@aws-cdk/aws-lambda";
 import { lambdaWithAliasAndDeploymentGroup } from "./utils";
 import * as cdk from "@aws-cdk/core";
 
@@ -29,61 +30,72 @@ export class HandoverStack extends cdk.Stack {
     environment[Keys.TABLE_NAME] = dynamodbTable.tableName;
     // ...
 
-    const lambdaApplication = new codedeploy.LambdaApplication(this, `${props.env}-handover-application`);
-
-    const propertiies = {
-      application:      lambdaApplication,
-      deploymentConfig: codedeploy.LambdaDeploymentConfig.CANARY_10PERCENT_15MINUTES,
-    };
+    const application = new codedeploy.LambdaApplication(this, `${props.env}-handover-application`);
 
     const createLambdaContext  = lambdaWithAliasAndDeploymentGroup(
       this,
       "create-lambda",
-      "create-lambda-bundle.entrypoint",
-      distPath,
-      "create-lambda-bundle.js",
-      environment,
-      propertiies,
+      {},
+      {
+        handler: "create-lambda-bundle.entrypoint",
+        code:    lambda.AssetCode.fromAsset(
+          distPath, { exclude: ["**", "!create-lambda.js"] },
+        ),
+        environment,
+      },
+      { application },
       props.env,
     );
 
     const deleteLambdaContext  = lambdaWithAliasAndDeploymentGroup(
       this,
       "delete-lambda",
-      "delete-lambda-bundle.entrypoint",
-      distPath,
-      "delete-lambda-bundle.js",
-      environment,
-      propertiies,
+      {},
+      {
+        handler: "delete-lambda-bundle.entrypoint",
+        code:    lambda.AssetCode.fromAsset(
+          distPath, { exclude: ["**", "!delete-lambda.js"] },
+        ),
+        environment,
+      },
+      { application },
       props.env,
     );
 
     const getLambdaContext     = lambdaWithAliasAndDeploymentGroup(
       this,
       "get-lambda",
-      "get-lambda-bundle.entrypoint",
-      distPath,
-      "get-lambda-bundle.js",
-      environment,
-      propertiies,
+      { provisionedConcurrentExecutions: 10 },
+      {
+        handler: "get-lambda-bundle.entrypoint",
+        code:    lambda.AssetCode.fromAsset(
+          distPath, { exclude: ["**", "!get-lambda.js"] },
+        ),
+        environment,
+      },
+      { application },
       props.env,
     );
 
     const updateLambdaContext  = lambdaWithAliasAndDeploymentGroup(
       this,
       "update-lambda",
-      "update-lambda-bundle.entrypoint",
-      distPath,
-      "update-lambda-bundle.js",
-      environment,
-      propertiies,
+      {},
+      {
+        handler: "update-lambda-bundle.entrypoint",
+        code:    lambda.AssetCode.fromAsset(
+          distPath, { exclude: ["**", "!update-lambda.js"] },
+        ),
+        environment,
+      },
+      { application },
       props.env,
     );
 
-    dynamodbTable.grantWriteData(createLambdaContext.func);
-    dynamodbTable.grantWriteData(deleteLambdaContext.func);
-    dynamodbTable.grantReadData(getLambdaContext.func);
-    dynamodbTable.grantReadWriteData(updateLambdaContext.func);
+    dynamodbTable.grantWriteData(createLambdaContext.fun);
+    dynamodbTable.grantWriteData(deleteLambdaContext.fun);
+    dynamodbTable.grantReadData(getLambdaContext.fun);
+    dynamodbTable.grantReadWriteData(updateLambdaContext.fun);
 
     const methodOptions: apigateway.MethodOptions = {
       authorizationType: apigateway.AuthorizationType.COGNITO,
@@ -92,18 +104,18 @@ export class HandoverStack extends cdk.Stack {
 
     const handovers = restApi.root.addResource("handovers");
 
-    const createIntegration = new apigateway.LambdaIntegration(createLambdaContext.funcAlias);
+    const createIntegration = new apigateway.LambdaIntegration(createLambdaContext.funAlias);
     handovers.addMethod("POST", createIntegration, { ...methodOptions, authorizationScopes: [fullAccessOAuthScope] });
 
     const handover = handovers.addResource("{id}");
 
-    const deleteIntegration = new apigateway.LambdaIntegration(deleteLambdaContext.funcAlias);
+    const deleteIntegration = new apigateway.LambdaIntegration(deleteLambdaContext.funAlias);
     handover.addMethod("DELETE", deleteIntegration, { ...methodOptions, authorizationScopes: [fullAccessOAuthScope] });
 
-    const getIntegration = new apigateway.LambdaIntegration(getLambdaContext.funcAlias);
+    const getIntegration = new apigateway.LambdaIntegration(getLambdaContext.funAlias);
     handover.addMethod("GET", getIntegration, { ...methodOptions, authorizationScopes: [readAccessOAuthScope, fullAccessOAuthScope] });
 
-    const updateIntegration = new apigateway.LambdaIntegration(updateLambdaContext.funcAlias);
+    const updateIntegration = new apigateway.LambdaIntegration(updateLambdaContext.funAlias);
     handover.addMethod("PUT", updateIntegration, { ...methodOptions, authorizationScopes: [fullAccessOAuthScope] });
 
     handovers.addCorsPreflight({
