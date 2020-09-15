@@ -11,7 +11,10 @@ export const lambdaWithAliasAndDeploymentGroup = (
   environment: Record<string, any>,
   propertiies: Record<string, any>,
   env: string,
-  ): any => {
+): {
+  funcAlias: lambda.Alias,
+  func:      lambda.Function,
+} => {
   const func = new lambda.Function(scope, `${env}-${id}`, {
     handler: handler,
     runtime: lambda.Runtime.NODEJS_12_X,
