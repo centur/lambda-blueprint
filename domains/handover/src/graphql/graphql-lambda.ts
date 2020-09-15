@@ -6,5 +6,11 @@ import resolvers from "./resolvers";
 
 const schema = makeExecutableSchema({ typeDefs, resolvers });
 
-// Todo: Use this line in your lambda-function and pass the body (graphql-query) as the second argument.
 graphql(schema, {} as any).then((result) => {}).catch((reason) => {});
+
+const express = require("express");
+const { graphqlHTTP } = require("express-graphql");
+
+const app = express();
+app.use("/graphiql", graphqlHTTP({ schema: schema, graphiql: true }));
+app.listen(4000);

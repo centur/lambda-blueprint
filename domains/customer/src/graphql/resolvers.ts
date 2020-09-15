@@ -28,4 +28,4 @@ const resolvers = {
   },
 };
 
-export default resolvers; // Todo
+export default resolvers;
