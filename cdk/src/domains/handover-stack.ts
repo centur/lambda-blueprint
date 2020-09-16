@@ -32,14 +32,14 @@ export class HandoverStack extends cdk.Stack {
 
     const application = new codedeploy.LambdaApplication(this, `${props.env}-handover-application`);
 
-    const createLambdaContext  = lambdaWithAliasAndDeploymentGroup(
+    const createLambdaContext = lambdaWithAliasAndDeploymentGroup(
       this,
       "create-lambda",
       {},
       {
         handler: "create-lambda-bundle.entrypoint",
         code:    lambda.AssetCode.fromAsset(
-          distPath, { exclude: ["**", "!create-lambda.js"] },
+          distPath, { exclude: ["**", "!create-lambda-bundle.js"] },
         ),
         environment,
       },
@@ -47,14 +47,14 @@ export class HandoverStack extends cdk.Stack {
       props.env,
     );
 
-    const deleteLambdaContext  = lambdaWithAliasAndDeploymentGroup(
+    const deleteLambdaContext = lambdaWithAliasAndDeploymentGroup(
       this,
       "delete-lambda",
       {},
       {
         handler: "delete-lambda-bundle.entrypoint",
         code:    lambda.AssetCode.fromAsset(
-          distPath, { exclude: ["**", "!delete-lambda.js"] },
+          distPath, { exclude: ["**", "!delete-lambda-bundle.js"] },
         ),
         environment,
       },
@@ -62,14 +62,14 @@ export class HandoverStack extends cdk.Stack {
       props.env,
     );
 
-    const getLambdaContext     = lambdaWithAliasAndDeploymentGroup(
+    const getLambdaContext    = lambdaWithAliasAndDeploymentGroup(
       this,
       "get-lambda",
-      { provisionedConcurrentExecutions: 10 },
+      {}, // { provisionedConcurrentExecutions: 1 }, // Todo
       {
         handler: "get-lambda-bundle.entrypoint",
         code:    lambda.AssetCode.fromAsset(
-          distPath, { exclude: ["**", "!get-lambda.js"] },
+          distPath, { exclude: ["**", "!get-lambda-bundle.js"] },
         ),
         environment,
       },
@@ -77,14 +77,14 @@ export class HandoverStack extends cdk.Stack {
       props.env,
     );
 
-    const updateLambdaContext  = lambdaWithAliasAndDeploymentGroup(
+    const updateLambdaContext = lambdaWithAliasAndDeploymentGroup(
       this,
       "update-lambda",
       {},
       {
         handler: "update-lambda-bundle.entrypoint",
         code:    lambda.AssetCode.fromAsset(
-          distPath, { exclude: ["**", "!update-lambda.js"] },
+          distPath, { exclude: ["**", "!update-lambda-bundle.js"] },
         ),
         environment,
       },
