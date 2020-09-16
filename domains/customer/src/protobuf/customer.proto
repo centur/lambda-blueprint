@@ -1,0 +1,9 @@
+package customer;
+
+syntax = "proto3";
+
+message Customer {
+    string id        = 1;
+    string property1 = 2;
+    string property2 = 3;
+}

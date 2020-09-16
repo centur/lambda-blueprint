@@ -1,0 +1,9 @@
+package handover;
+
+syntax = "proto3";
+
+message Handover {
+    string id        = 1;
+    string property1 = 2;
+    string property2 = 3;
+}
