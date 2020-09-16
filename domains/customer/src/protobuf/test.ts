@@ -4,6 +4,7 @@ load("customer.proto")
   .then ((result) => {
     const Customer = result.lookupType("customer.Customer");
 
+    // Is there any validation?
     const customer = Customer.create({ id: "id", property1: "1", property2: "2" });
     console.log(`customer = ${JSON.stringify(customer)}`);
 
