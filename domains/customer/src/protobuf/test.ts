@@ -6,12 +6,12 @@ load("customer.proto")
 
     // Is there any validation?
     const customer = Customer.create({ id: "id", property1: "1", property2: "2" });
-    console.log(`customer = ${JSON.stringify(customer)}`);
+    console.debug(`customer = ${JSON.stringify(customer)}`);
 
     const cencoded = Customer.encode(customer).finish();
-    console.log(`cencoded = ${Array.prototype.toString.call(cencoded)}`);
+    console.debug(`cencoded = ${Array.prototype.toString.call(cencoded)}`);
 
     const cdecoded = Customer.decode(cencoded);
-    console.log(`cdecoded = ${JSON.stringify(cdecoded)}`); // Todo: Export functions?
+    console.debug(`cdecoded = ${JSON.stringify(cdecoded)}`); // Todo: Export functions?
   })
   .catch((reason) => console.error(reason));
