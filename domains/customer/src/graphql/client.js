@@ -1,7 +1,7 @@
-const createQuery = "mutation($dto: CreateCustomerDto!) { createCustomer(dto: $dto) { id } }";
-const deleteQuery = "mutation($id: ID!) { deleteCustomer($id: id) }";
-const getQuery    = "query($id: ID!) { getCustomer(id: $id) { id property1 property2 } }";
-const updateQuery = "mutation($id: ID!, $dto: UpdateCustomerDto! { updateCustomer(id: $id, dto: $dto) { id } })";
+const CREATE_QUERY = "mutation($dto: CreateCustomerDto!) { createCustomer(dto: $dto) { id } }";
+const DELETE_QUERY = "mutation($id: ID!) { deleteCustomer($id: id) }";
+const GET_QUERY    = "query($id: ID!) { getCustomer(id: $id) { id property1 property2 } }";
+const UPDATE_QUERY = "mutation($id: ID!, $dto: UpdateCustomerDto! { updateCustomer(id: $id, dto: $dto) { id } })";
 
 const doRequest = async ({ query, variables }) => {
   const json = await fetch("/graphql", {

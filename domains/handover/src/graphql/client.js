@@ -1,7 +1,7 @@
-const createQuery = "mutation($dto: CreateHandoverDto!) { createHandover(dto: $dto) { id } }";
-const deleteQuery = "mutation($id: ID!) { deleteHandover($id: id) }";
-const getQuery    = "query($id: ID!) { getHandover(id: $id) { id property1 property2 } }";
-const updateQuery = "mutation($id: ID!, $dto: UpdateHandoverDto! { updateHandover(id: $id, dto: $dto) { id } })";
+const CREATE_QUERY = "mutation($dto: CreateHandoverDto!) { createHandover(dto: $dto) { id } }";
+const DELETE_QUERY = "mutation($id: ID!) { deleteHandover($id: id) }";
+const GET_QUERY    = "query($id: ID!) { getHandover(id: $id) { id property1 property2 } }";
+const UPDATE_QUERY = "mutation($id: ID!, $dto: UpdateHandoverDto! { updateHandover(id: $id, dto: $dto) { id } })";
 
 const doRequest = async ({ query, variables }) => {
   const json = await fetch("/graphql", {
