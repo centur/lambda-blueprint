@@ -1,12 +1,11 @@
 import * as cdk from "@aws-cdk/core";
 import { CustomerResources } from "./customer-resources";
 import { HandoverResources } from "./handover-resources";
-import { ApiGateway } from "./api-gateway";
 
 const app = new cdk.App({});
 const env = process.env["ENV"];
 
-new ApiGateway(app, { env });
+if (!env) { throw new Error("You missed a value for env-var 'ENV'."); }
 
 new CustomerResources(app, { env });
 new HandoverResources(app, { env });

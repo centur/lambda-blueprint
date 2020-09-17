@@ -11,10 +11,10 @@ export class HandoverFunctions extends cdk.Stack {
     super(scope, `${props.env}-handover-functions`);
 
     // Todo
-    const restApi                = {} as apigateway.RestApi;
-    const restAuthorizer         = {} as apigateway.CfnAuthorizer;
-    const readerAccessOAuthScope = "";
-    const writerAccessOAuthScope = "";
+    const restApi                = props.restApi;
+    const restAuthorizer         = props.restAuthorizer;
+    const readerAccessOAuthScope = props.readerAccessOAuthScope.scopeName;
+    const writerAccessOAuthScope = props.writerAccessOAuthScope.scopeName;
 
     const tableName      = `${props.env}-handovers`;
     const handoversTable = dynamodb.Table.fromTableName(this, tableName, cdk.Fn.importValue(tableName));
