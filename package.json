@@ -15,11 +15,7 @@
     "build": "lerna bootstrap",
     "test:unit": "lerna run test:unit",
     "test:intr": "lerna run test:intr",
-    "bundle": "lerna run bundle",
-    "deploy:qa": "cdk deploy  '*' -c ENV=qa",
-    "remove:qa": "cdk destroy '*' -c ENV=qa",
-    "deploy:prod": "cdk deploy  '*' -c ENV=prod",
-    "remove:prod": "cdk destroy '*' -c ENV=prod"
+    "bundle": "lerna run bundle"
   },
   "dependencies": {
     "aws-sdk": "^2.753.0",

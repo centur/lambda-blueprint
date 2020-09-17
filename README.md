@@ -21,8 +21,10 @@ ddd-driven blueprint of a lambda-based REST-/CRUD-backend secured with OAuth, wr
 3. npm run test:unit (optional, have a look at the ci.yaml)
 4. npm run test:intr (optional, have a look at the ci.yaml)
 5. npm run bundle
-6. npm run deploy:<env> (env = qa | prod)
-7. npm run remove:<env> (env = qa | prod)
+6. ENV=(qa|prod) cdk -a 'npx ts-node cdk/src/resources/app.ts' deploy  '*' (splitted, will not be modified that often)
+x. ENV=(qa|prod) cdk -a 'npx ts-node cdk/src/resources/app.ts' destroy '*' (splitted, will not be modified that often)
+7. ENV=(qa|prod) cdk -a 'npx ts-node cdk/src/functions/app.ts' deploy  '*'
+x. ENV=(qa|prod) cdk -a 'npx ts-node cdk/src/functions/app.ts' destroy '*'
 x. npm run clean
 ...
 ```
@@ -30,6 +32,8 @@ x. npm run clean
 ### 3. How to invoke the APIs?
 
 ```
+WORK IN PROGRESS ...
+
 1. Get access_token (M2M-Communication)
 curl -X POST --user <CLIENT_ID>:<CLIENT_SECRET> "https://<AUTH_DOMAIN>/oauth2/token?grant_type=client_credentials" -H "Content-Type: application/x-www-form-urlencoded"
 
