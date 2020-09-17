@@ -14,13 +14,13 @@ export class ParameterStore {
       WithDecryption: true,
     };
     try {
-      const response = await this.ssm.getParametersByPath(request).promise();
-      const result: Record<string, string> = {};
-      if (response.Parameters) {
+      const result = await this.ssm.getParametersByPath(request).promise();
+      const record: Record<string, string> = {};
+      if (result.Parameters) {
         // @ts-ignore
-        response.Parameters.forEach((parameter) => { result[parameter.Name] = parameter.Value; });
+        result.Parameters.forEach((parameter) => { record[parameter.Name] = parameter.Value; });
       }
-      return result;
+      return record;
     } catch (e) {
       console.error(e);
       throw e;

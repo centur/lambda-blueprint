@@ -4,7 +4,7 @@ export const deepMerge = <T1 extends Record<string, any>, T2 extends Record<stri
   target: T1,
   source: T2,
 ): T1 => {
-  const isObject = (object: any) => object && typeof object === "object" && object.constructor === Object;
+  const isObject = (object: any) => object && typeof object === "object" && !(object instanceof Array);
 
   Object.keys(source).forEach((key) => {
     const targetValue = target[key];
@@ -14,13 +14,13 @@ export const deepMerge = <T1 extends Record<string, any>, T2 extends Record<stri
       target[key] = deepMerge<T1, T2>(targetValue, sourceValue);
     } else {
       // @ts-ignore
-      target[key] = sourceValue; // Arrays will always be overwritten here. Todo?
+      target[key] = sourceValue; // Array will always be overwritten here. Todo: Maybe use lodash here?
     }
   });
   return target;
 };
 
-export const assertNotNull = (obj: any): any => {
-  if (obj == null) { throw new Error400(); }
-  return obj;
+export const assertNotNull = (object: any): any => {
+  if (object === null) { throw new Error400(); }
+  return object;
 };
