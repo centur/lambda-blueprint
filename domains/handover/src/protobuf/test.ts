@@ -4,7 +4,6 @@ load("handover.proto")
   .then ((result) => {
     const Handover = result.lookupType("handover.Handover");
 
-    // Is there any validation?
     const handover = Handover.create({ id: "id", property1: "1", property2: "2" });
     console.debug(`handover = ${JSON.stringify(handover)}`);
 
