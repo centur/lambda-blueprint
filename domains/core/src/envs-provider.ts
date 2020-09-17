@@ -1,14 +1,14 @@
 export const getEnvVar = <T>(key: string): T | undefined => {
-  const  value = process.env[key] as any;
+  const envVar = process.env[key] as any;
   try {
-    return JSON.parse(value) as T; // Will produce the correct type.
+    return JSON.parse(envVar) as T; // It will produce the correct type.
   } catch (e) {
-    return value as T;
+    return envVar as T;
   }
 };
 
 export const getEnvVarOrElseThrows = <T>(key: string): T => {
-  const  value = getEnvVar(key);
-  if (!value) { throw new Error(`There is no value for key: ${key}`); }
-  return value as T;
+  const envVar = getEnvVar(key);
+  if (!envVar) { throw new Error(`There is no value for key: ${key}`); }
+  return envVar as T;
 };
