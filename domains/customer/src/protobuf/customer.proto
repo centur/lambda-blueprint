@@ -3,7 +3,17 @@ package customer;
 syntax = "proto3";
 
 message Customer {
-    string id        = 1;
-    string property1 = 2;
-    string property2 = 3;
+  string id        = 1;
+  string property1 = 2;
+  string property2 = 3;
+}
+
+message CreateCustomerDto {
+  string property1 = 1;
+  string property2 = 2;
+}
+
+message UpdateCustomerDto {
+  string property1 = 1;
+  string property2 = 2;
 }

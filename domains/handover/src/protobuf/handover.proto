@@ -3,7 +3,17 @@ package handover;
 syntax = "proto3";
 
 message Handover {
-    string id        = 1;
-    string property1 = 2;
-    string property2 = 3;
+  string id        = 1;
+  string property1 = 2;
+  string property2 = 3;
+}
+
+message CreateHandoverDto {
+  string property1 = 1;
+  string property2 = 2;
+}
+
+message UpdateHandoverDto {
+  string property1 = 1;
+  string property2 = 2;
 }
