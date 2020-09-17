@@ -7,7 +7,3 @@ export const getEnvVar = <T>(key: string): T | undefined => {
     return envVar as T;
   }
 };
-
-export const getEnvVarOrElseThrows = <T>(key: string): T => {
-  throw new Error(); // Todo
-};
