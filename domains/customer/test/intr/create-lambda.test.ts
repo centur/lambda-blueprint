@@ -15,7 +15,7 @@ describe("create-lambda", () => {
     const result = await entrypoint(createEvent as any);
 
     // @ts-ignore
-    expect(result.headers.Location).toBeTruthy(); // Todo: Check the presence of the uuid?
+    expect(result.headers.Location).toBeTruthy(); // Todo: Check presence of uuid?
     expect(result.statusCode).toBe(201);
     // ...
   });

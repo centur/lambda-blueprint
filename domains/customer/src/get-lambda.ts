@@ -10,12 +10,14 @@ export const entrypoint = async (event: APIGatewayProxyEvent): Promise<APIGatewa
   console.debug("Received customer-event: %s", event);
   try {
     const pathParameters = assertNotNull(event.pathParameters);
+
+    // Only initialize if this is a valid request ...
     if (!service) { service = await createService(); }
 
-    const dto = await service.getCustomer(pathParameters.id);
+    const customerDto = await service.getCustomer(pathParameters.id);
     return {
       statusCode: 200,
-      body:       JSON.stringify(dto),
+      body:       JSON.stringify(customerDto),
     };
   } catch (e) {
     return handleError(e);

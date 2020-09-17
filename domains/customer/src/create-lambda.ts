@@ -8,15 +8,16 @@ import { Service } from "./utils/service";
 // Keep outside to re-use it for subsequent invocations.
 let service: Service;
 
-export async function entrypoint(
-  event: APIGatewayProxyEvent,
-): Promise<APIGatewayProxyResult> {
+export const entrypoint = async (event: APIGatewayProxyEvent): Promise<APIGatewayProxyResult> => {
   console.debug("Received customer-event: %s", event);
   try {
-    const body = assertNotNull(event.body);
+    const json = assertNotNull(event.body);
+
+    // Only initialize if this is a valid request ...
     if (!service) { service = await createService(); }
-    const createDto = JSON.parse(body);
-    const either = CreateDto.decode(createDto);
+
+    const body   = JSON.parse(json);
+    const either = CreateDto.decode(body);
     if (isRight(either)) {
       const id = await service.createCustomer(either.right);
       const headers = {

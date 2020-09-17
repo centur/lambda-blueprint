@@ -1,6 +1,6 @@
 {
   "httpMethod": "POST",
-  "requestContext": { "domain": "domain", "stage": "stage" },
+  "requestContext": { "domainName": "domainName", "stage": "stage" },
   "headers": {},
   "body": "{ \"property1\": \"1\", \"property2\": \"2\" }",
   "path": "/customers"
