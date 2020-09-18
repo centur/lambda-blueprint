@@ -21,6 +21,7 @@
     "aws-sdk": "^2.753.0",
     "fp-ts": "^2.8.2",
     "io-ts": "^2.2.10",
+    "ioredis": "^4.17.3",
     "protobufjs": "^6.10.1",
     "graphql": "^15.3.0",
     "graphql-tools": "^6.2.2",
