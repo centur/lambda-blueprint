@@ -46,7 +46,7 @@ export class Service {
     const handoverUpdated = deepMerge(handover, updateDto);
     const now = new Date();
     handoverUpdated.updatedAt = now.toISOString();
-    now.setDate(now.getDate() + 30); // Todo: Extract this to some utility-function and re-use it here?
+    now.setDate(now.getDate() + 30); // Todo: Extract this to some utility-function and re-use it here and above? Maybe create some hook?
     handoverUpdated.ttl       = Math.floor(now.getTime() / 1000);
     return this.crudRepository.put(handoverUpdated);
   }

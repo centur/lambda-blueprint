@@ -46,7 +46,7 @@ export class Service {
     const customerUpdated = deepMerge(customer, updateDto);
     const now = new Date();
     customerUpdated.updatedAt = now.toISOString();
-    now.setDate(now.getDate() + 30); // Todo: Extract this to some utility-function and re-use it here?
+    now.setDate(now.getDate() + 30); // Todo: Extract this to some utility-function and re-use it here and above? Maybe create some hook?
     customerUpdated.ttl       = Math.floor(now.getTime() / 1000);
     return this.crudRepository.put(customerUpdated);
   }
