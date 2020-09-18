@@ -16,6 +16,8 @@ ddd-driven blueprint of a lambda-based REST-/CRUD-backend secured with OAuth, wr
 ### 2. How to create the APIs?
 
 ```
+fyi: lerna is used to execute most of the commands below across all the domains.
+
 1. npm install
 2. npm run build
 3. npm run test:unit (optional, have a look at the ci.yaml)
