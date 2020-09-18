@@ -9,7 +9,7 @@ export class CustomerResources extends cdk.Stack {
 
     new dynamodb.Table(this, tableName, {
       tableName,
-      timeToLiveAttribute: "ttl",
+//    timeToLiveAttribute: "ttl",
       partitionKey: {
         name: "id",
         type: dynamodb.AttributeType.STRING,

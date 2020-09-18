@@ -1,9 +1,11 @@
-import { CrudRepository, Error404, deepMerge } from "@lambda-blueprint/core";
+import { CrudRepository, Error404, deepCopy } from "@lambda-blueprint/core";
 import { Handover, toHandoverDto } from "../entities/handover";
 import { CreateDto } from "../dtos/create-dto";
 import { UpdateDto } from "../dtos/update-dto";
 import { HandoverDto } from "../dtos/handover-dto";
 import { v4 as uuidv4 } from "uuid";
+
+const now = (): string => new Date().toISOString();
 
 export class Service {
   constructor(
@@ -11,16 +13,12 @@ export class Service {
   ) {}
 
   async createHandover(createDto: CreateDto): Promise<string> {
-    const now = new Date();
-    const iso = now.toISOString();
-
-    now.setDate(now.getDate() + 30); // 30 days
+    const timestamp = now();
 
     const handover: Handover = {
       id: uuidv4(),
-      createdAt: iso,
-      updatedAt: iso,
-      ttl: Math.floor(now.getTime() / 1000),
+      createdAt: timestamp,
+      updatedAt: timestamp,
       ...createDto,
     };
     await this.crudRepository.put(handover).catch((reason: any) => Promise.reject(reason));
@@ -43,11 +41,7 @@ export class Service {
     const keys:  Partial<Handover> = { id };
     const handover = await this.crudRepository.get(keys).catch((reason: any) => Promise.reject(reason));
     if (!handover) { throw new Error404(); }
-    const handoverUpdated = deepMerge(handover, updateDto);
-    const now = new Date();
-    handoverUpdated.updatedAt = now.toISOString();
-    now.setDate(now.getDate() + 30); // Todo: Extract this to some utility-function and re-use it here and above? Maybe create some hook?
-    handoverUpdated.ttl       = Math.floor(now.getTime() / 1000);
+    const handoverUpdated = deepCopy(handover, updateDto);
     return this.crudRepository.put(handoverUpdated);
   }
 }
