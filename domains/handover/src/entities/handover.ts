@@ -9,12 +9,13 @@ export const Handover = t.intersection([
     id:        t.string, // Partition-Key
     property1: t.string,
     property2: t.string,
+    ttl:       t.number, // ttl-Attribute
   }),
 ]);
 
 export type Handover = t.TypeOf<typeof Handover>;
 
 export const toHandoverDto = (handover: Handover): HandoverDto => {
-  const { createdAt, updatedAt, ...handoverDto } = handover;
+  const { createdAt, updatedAt, ttl, ...handoverDto } = handover;
   return handoverDto;
 };

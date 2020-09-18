@@ -11,12 +11,16 @@ export class Service {
   ) {}
 
   async createCustomer(createDto: CreateDto): Promise<string> {
-    const timestamp = new Date().toISOString();
+    const now = new Date();
+    const iso = now.toISOString();
+
+    now.setDate(now.getDate() + 30); // 30 days
 
     const customer: Customer = {
       id: uuidv4(),
-      createdAt: timestamp,
-      updatedAt: timestamp,
+      createdAt: iso,
+      updatedAt: iso,
+      ttl: Math.floor(now.getTime() / 1000),
       ...createDto,
     };
     await this.crudRepository.put(customer).catch((reason: any) => Promise.reject(reason));
@@ -39,8 +43,12 @@ export class Service {
     const keys:  Partial<Customer> = { id };
     const customer = await this.crudRepository.get(keys).catch((reason: any) => Promise.reject(reason));
     if (!customer) { throw new Error404(); }
-    customer.updatedAt = new Date().toISOString();
     const customerUpdated = deepMerge(customer, updateDto);
+    const now = new Date();
+    const iso = now.toISOString();
+    now.setDate(now.getDate() + 30); // Todo: Extract this to some utility-function and re-use it here?
+    customerUpdated.updatedAt = iso;
+    customerUpdated.ttl       = Math.floor(now.getTime() / 1000);
     return this.crudRepository.put(customerUpdated);
   }
 }
