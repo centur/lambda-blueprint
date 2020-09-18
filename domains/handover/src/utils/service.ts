@@ -45,9 +45,8 @@ export class Service {
     if (!handover) { throw new Error404(); }
     const handoverUpdated = deepMerge(handover, updateDto);
     const now = new Date();
-    const iso = now.toISOString();
-    now.setDate(now.getDate() + 30);
-    handoverUpdated.updatedAt = iso; // Todo: Extract this to some utility-function and re-use it here?
+    handoverUpdated.updatedAt = now.toISOString();
+    now.setDate(now.getDate() + 30); // Todo: Extract this to some utility-function and re-use it here?
     handoverUpdated.ttl       = Math.floor(now.getTime() / 1000);
     return this.crudRepository.put(handoverUpdated);
   }
