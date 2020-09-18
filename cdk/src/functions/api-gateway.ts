@@ -11,7 +11,7 @@ export class ApiGateway extends cdk.Stack {
   constructor(scope: cdk.App, props: any) {
     super(scope, `${props.env}-api-gateway`);
 
-    // Todo: custom domain
+    // Todo: custom-domain and custom cf-distribution?
     this.restApi = new apigateway.RestApi(this, `${props.env}-api`, {
       deployOptions: { stageName: "v1" },
     });
@@ -30,7 +30,7 @@ export class ApiGateway extends cdk.Stack {
     this.readerAccessOAuthScope = cognito.OAuthScope.custom(`${userPoolResourceServer.name}/readerAccess`);
     this.writerAccessOAuthScope = cognito.OAuthScope.custom(`${userPoolResourceServer.name}/writerAccess`);
 
-    // Todo: custom domain
+    // Todo: custom-domain
     userPool.addDomain(`${props.env}-user-pool-domain`, { cognitoDomain: { domainPrefix: "" } });
 
     userPool.addClient(`${props.env}-reader-access-client`, {
