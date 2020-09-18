@@ -23,10 +23,10 @@ ddd-driven blueprint of a lambda-based REST-/CRUD-backend secured with OAuth, wr
 5. npm run bundle
 6. cdk -a 'npx ts-node cdk/src/resources/app.ts' bootstrap
 7. cdk -a 'npx ts-node cdk/src/functions/app.ts' bootstrap
-8. ENV=(qa|prod) cdk -a 'npx ts-node cdk/src/resources/app.ts' deploy  '*' (splitted, will not be modified that often)
-x. ENV=(qa|prod) cdk -a 'npx ts-node cdk/src/resources/app.ts' destroy '*' (splitted, will not be modified that often)
-9. ENV=(qa|prod) cdk -a 'npx ts-node cdk/src/functions/app.ts' deploy  '*'
-x. ENV=(qa|prod) cdk -a 'npx ts-node cdk/src/functions/app.ts' destroy '*'
+8. ENV=<qa|prod> cdk -a 'npx ts-node cdk/src/resources/app.ts' deploy  '*' (splitted, will not be modified that often)
+x. ENV=<qa|prod> cdk -a 'npx ts-node cdk/src/resources/app.ts' destroy '*' (splitted, will not be modified that often)
+9. ENV=<qa|prod> cdk -a 'npx ts-node cdk/src/functions/app.ts' deploy  '*'
+x. ENV=<qa|prod> cdk -a 'npx ts-node cdk/src/functions/app.ts' destroy '*'
 x. npm run clean
 ...
 ```
