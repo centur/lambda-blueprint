@@ -21,12 +21,12 @@ ddd-driven blueprint of a lambda-based REST-/CRUD-backend secured with OAuth, wr
 3. npm run test:unit (optional, have a look at the ci.yaml)
 4. npm run test:intr (optional, have a look at the ci.yaml)
 5. npm run bundle
-6. cdk -a 'npx ts-node cdk/src/resources/app.ts' bootstrap (only once)
-7. cdk -a 'npx ts-node cdk/src/functions/app.ts' bootstrap (only once)
-8. ENV=<dev|qa|prod|...> cdk -a 'npx ts-node cdk/src/resources/app.ts' deploy  '*' (splitted, will not be modified that often)
-x. ENV=<dev|qa|prod|...> cdk -a 'npx ts-node cdk/src/resources/app.ts' destroy '*' (splitted, will not be modified that often)
-9. ENV=<dev|qa|prod|...> cdk -a 'npx ts-node cdk/src/functions/app.ts' deploy  '*'
-x. ENV=<dev|qa|prod|...> cdk -a 'npx ts-node cdk/src/functions/app.ts' destroy '*'
+6. cdk -a "npx ts-node cdk/src/resources/app.ts" bootstrap (only once)
+7. cdk -a "npx ts-node cdk/src/functions/app.ts" bootstrap (only once)
+8. ENV=<dev|qa|prod|...> cdk -a "npx ts-node cdk/src/resources/app.ts" deploy  "*" (splitted, will not be modified that often)
+x. ENV=<dev|qa|prod|...> cdk -a "npx ts-node cdk/src/resources/app.ts" destroy "*" (splitted, will not be modified that often)
+9. ENV=<dev|qa|prod|...> cdk -a "npx ts-node cdk/src/functions/app.ts" deploy  "*"
+x. ENV=<dev|qa|prod|...> cdk -a "npx ts-node cdk/src/functions/app.ts" destroy "*"
 x. npm run clean
 ...
 ```
