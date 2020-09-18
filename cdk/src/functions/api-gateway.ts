@@ -11,10 +11,11 @@ export class ApiGateway extends cdk.Stack {
   constructor(scope: cdk.App, props: any) {
     super(scope, `${props.env}-api-gateway`);
 
-    // Todo: custom-domain and custom cf-distribution?
+    // Todo: custom-domain
     this.restApi = new apigateway.RestApi(this, `${props.env}-api`, {
       deployOptions: { stageName: "v1" },
     });
+    // Todo: Is edge-caching enabled, when using edge-optimized endpoints?
 
     const userPool = new cognito.UserPool(this, `${props.env}-user-pool`);
 
