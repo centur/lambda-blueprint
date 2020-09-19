@@ -3,7 +3,7 @@
 [![prettier](https://img.shields.io/badge/code_style-prettier-ff69b4.svg)](https://github.com/prettier/prettier)
 [![d](https://api.dependabot.com/badges/status?host=github&repo=Syy0n/lambda-blueprint)](https://dependabot.com)
 
-ddd-driven blueprint of a lambda-based REST-/CRUD-backend secured with OAuth, written in js/ts.
+ddd-driven blueprint of a lambda-based REST-/CRUD-backend secured with OAuth2, written in js/ts.
 
 ### 1. Prerequisites
 
@@ -38,10 +38,10 @@ x. npm run clean
 ```
 WORK IN PROGRESS ...
 
-1. Get access_token (M2M-Communication)
+1. Get <access_token> (M2M-Communication)
 curl -X POST --user <CLIENT_ID>:<CLIENT_SECRET> "https://<AUTH_DOMAIN>/oauth2/token?grant_type=client_credentials" -H "Content-Type: application/x-www-form-urlencoded"
 
-2. Use access_token (M2M-Communication)
+2. Use <access_token> (M2M-Communication)
 curl -X POST   "https://<API_DOMAIN>/v1/<resource>"      -H "Authorization:<access_token>" -H "Content-Type: application/json" -d "<body>" (domains/<domain>/src/dtos/create-dto.ts)
 curl -X DELETE "https://<API_DOMAIN>/v1/<resource>/<ID>" -H "Authorization:<access_token>"
 curl -X PUT    "https://<API_DOMAIN>/v1/<resource>/<ID>" -H "Authorization:<access_token>" -H "Content-Type: application/json" -d "<body>" (domains/<domain>/src/dtos/update-dto.ts)
