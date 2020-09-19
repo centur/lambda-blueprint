@@ -1,9 +1,9 @@
 import * as dynamodb from "@aws-cdk/aws-dynamodb";
 import * as cdk from "@aws-cdk/core";
 
-export class CustomerResources extends cdk.Stack {
+export class CustomerTable extends cdk.Stack {
   constructor(scope: cdk.App, props: any) {
-    super(scope, `${props.env}-customer-resources`);
+    super(scope, `${props.env}-customer-table`);
 
     const tableName = `${props.env}-customers`;
 

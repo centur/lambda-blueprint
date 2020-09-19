@@ -1,9 +1,9 @@
 import * as dynamodb from "@aws-cdk/aws-dynamodb";
 import * as cdk from "@aws-cdk/core";
 
-export class HandoverResources extends cdk.Stack {
+export class HandoverTable extends cdk.Stack {
   constructor(scope: cdk.App, props: any) {
-    super(scope, `${props.env}-handover-resources`);
+    super(scope, `${props.env}-handover-table`);
 
     const tableName = `${props.env}-handovers`;
 

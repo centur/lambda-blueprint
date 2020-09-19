@@ -15,7 +15,6 @@ export class ApiGateway extends cdk.Stack {
     this.restApi = new apigateway.RestApi(this, `${props.env}-api`, {
       deployOptions: { stageName: "v1" },
     });
-    // Todo: Is edge-caching enabled, when using edge-optimized endpoints?
 
     const userPool = new cognito.UserPool(this, `${props.env}-user-pool`);
 
