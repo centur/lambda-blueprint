@@ -1,11 +1,11 @@
 import * as dynamodb from "@aws-cdk/aws-dynamodb";
 import * as cdk from "@aws-cdk/core";
 
-export class CustomerTable extends cdk.Stack {
+export class HandoverDB extends cdk.Stack {
   constructor(scope: cdk.App, props: any) {
-    super(scope, `${props.env}-customer-table`);
+    super(scope, `${props.env}-handover-db`);
 
-    const tableName = `${props.env}-customers`;
+    const tableName = `${props.env}-handovers`;
 
     new dynamodb.Table(this, tableName, {
       tableName,
