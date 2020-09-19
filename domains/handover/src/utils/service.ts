@@ -11,12 +11,10 @@ export class Service {
   ) {}
 
   async createHandover(createDto: CreateDto): Promise<string> {
-    const timestamp = new Date().toISOString();
-
     const handover: Handover = {
       id: uuidv4(),
-      createdAt: timestamp,
-      updatedAt: timestamp,
+      createdAt: "", // Todo: Hook in entity?
+      updatedAt: "", // Todo: Hook in entity?
       ...createDto,
     };
     await this.crudRepository.put(handover).catch((reason: any) => Promise.reject(reason));

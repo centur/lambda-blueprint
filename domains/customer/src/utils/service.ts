@@ -11,12 +11,10 @@ export class Service {
   ) {}
 
   async createCustomer(createDto: CreateDto): Promise<string> {
-    const timestamp = new Date().toISOString();
-
     const customer: Customer = {
       id: uuidv4(),
-      createdAt: timestamp,
-      updatedAt: timestamp,
+      createdAt: "", // Todo: Hook in entity?
+      updatedAt: "", // Todo: Hook in entity?
       ...createDto,
     };
     await this.crudRepository.put(customer).catch((reason: any) => Promise.reject(reason));
