@@ -4,7 +4,7 @@ module.exports = {
   coverageReporters: [],
   coverageThreshold: {},
   testEnvironment: "node",
-  clearMocks: false,
-  resetMocks: false,
+  clearMocks: true,
+//resetMocks: true,
   verbose: true,
 };
