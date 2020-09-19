@@ -3,7 +3,8 @@ import * as cdk from "@aws-cdk/core";
 
 export class HandoverDB extends cdk.Stack {
   constructor(scope: cdk.App, props: any) {
-    super(scope, `${props.env}-handover-db`);
+
+    super(scope, `${props.env}-handover-db`); // Todo
 
     const tableName = `${props.env}-handovers`;
 
