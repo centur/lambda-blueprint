@@ -16,13 +16,13 @@ export class CustomerFunctions extends cdk.Stack {
     const readerAccessOAuthScope = props.readerAccessOAuthScope.scopeName;
     const writerAccessOAuthScope = props.writerAccessOAuthScope.scopeName;
 
-    const tableName      = `${props.env}-customers`;
-    const customersTable = dynamodb.Table.fromTableName(this, tableName, cdk.Fn.importValue(tableName));
+    const tableName     = `${props.env}-customers`;
+    const customerTable = dynamodb.Table.fromTableName(this, tableName, cdk.Fn.importValue(tableName));
 
     const environment: Record<string, string> = {};
 
     environment[Keys.ENV]        = props.env;
-    environment[Keys.TABLE_NAME] = customersTable.tableName;
+    environment[Keys.TABLE_NAME] = customerTable.tableName;
     // ...
 
     const createLambdaContext = lambdaWithAlias(
@@ -81,10 +81,10 @@ export class CustomerFunctions extends cdk.Stack {
       props.env,
     );
 
-    customersTable.grantWriteData(createLambdaContext.func);
-    customersTable.grantWriteData(deleteLambdaContext.func);
-    customersTable.grantReadData(getLambdaContext.func);
-    customersTable.grantReadWriteData(updateLambdaContext.func);
+    customerTable.grantWriteData(createLambdaContext.func);
+    customerTable.grantWriteData(deleteLambdaContext.func);
+    customerTable.grantReadData(getLambdaContext.func);
+    customerTable.grantReadWriteData(updateLambdaContext.func);
 
     const methodOptions: apigateway.MethodOptions = {
       authorizationType: apigateway.AuthorizationType.COGNITO,

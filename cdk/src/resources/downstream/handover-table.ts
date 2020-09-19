@@ -16,7 +16,7 @@ export default class HandoverTable extends cdk.Stack {
       },
     });
 
-    new cdk.CfnOutput(this, `${table}-output`, {
+    new cdk.CfnOutput(this, `${table}-output`, { // Imported in functions
       exportName: table,
       value:      table,
     });

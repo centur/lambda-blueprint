@@ -16,13 +16,13 @@ export class HandoverFunctions extends cdk.Stack {
     const readerAccessOAuthScope = props.readerAccessOAuthScope.scopeName;
     const writerAccessOAuthScope = props.writerAccessOAuthScope.scopeName;
 
-    const tableName      = `${props.env}-handovers`;
-    const handoversTable = dynamodb.Table.fromTableName(this, tableName, cdk.Fn.importValue(tableName));
+    const tableName     = `${props.env}-handovers`;
+    const handoverTable = dynamodb.Table.fromTableName(this, tableName, cdk.Fn.importValue(tableName));
 
     const environment: Record<string, string> = {};
 
     environment[Keys.ENV]        = props.env;
-    environment[Keys.TABLE_NAME] = handoversTable.tableName;
+    environment[Keys.TABLE_NAME] = handoverTable.tableName;
     // ...
 
     const createLambdaContext = lambdaWithAlias(
@@ -81,10 +81,10 @@ export class HandoverFunctions extends cdk.Stack {
       props.env,
     );
 
-    handoversTable.grantWriteData(createLambdaContext.func);
-    handoversTable.grantWriteData(deleteLambdaContext.func);
-    handoversTable.grantReadData(getLambdaContext.func);
-    handoversTable.grantReadWriteData(updateLambdaContext.func);
+    handoverTable.grantWriteData(createLambdaContext.func);
+    handoverTable.grantWriteData(deleteLambdaContext.func);
+    handoverTable.grantReadData(getLambdaContext.func);
+    handoverTable.grantReadWriteData(updateLambdaContext.func);
 
     const methodOptions: apigateway.MethodOptions = {
       authorizationType: apigateway.AuthorizationType.COGNITO,
