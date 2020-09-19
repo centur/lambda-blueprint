@@ -20,7 +20,7 @@ describe("create-lambda", () => {
       expect(spyInstance).toHaveBeenCalledWith(dto);
 
       // @ts-ignore
-      expect(result.headers.Location).toBeTruthy(); // Todos: Check uuid?
+      expect(result.headers.Location).toBeTruthy(); // Todos: Check presence of uuid in headers?
       expect(result.statusCode).toBe(201);
       // ...
     }
