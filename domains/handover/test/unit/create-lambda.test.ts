@@ -8,6 +8,7 @@ jest.mock("../../src/utils/service");
 
 describe("create-lambda", () => {
   it("should create handover and return 201 when body of create-event is valid", async () => {
+
     const spyInstance = jest.spyOn(Service.prototype, "createHandover")
       .mockImplementation((): any => uuidv4());
 
