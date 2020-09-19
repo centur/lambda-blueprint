@@ -1,8 +1,8 @@
 {
+  "path": "/customers/{id}",
   "httpMethod": "DELETE",
   "headers": {},
-  "body": null,
-  "path": "/customers/{id}",
+  "body": {},
   "pathParameters": {
     "id": "99448ca9-368d-4f23-a5e6-ce81f35c8157"
   }

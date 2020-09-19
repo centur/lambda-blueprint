@@ -11,11 +11,13 @@ describe("create-lambda", () => {
     await deleteTable(process.env[Keys.TABLE_NAME]!);
   });
 
-  it("should store body of create-event if valid", async () => {
+  it("should create customer and return 201 when body of create-event is valid", async () => {
+    createEvent.body = JSON.stringify({ property1: "1", property2: "2" });
+
     const result = await entrypoint(createEvent as any);
 
     // @ts-ignore
-    expect(result.headers.Location).toBeTruthy(); // Todo: Check presence of uuid?
+    expect(result.headers.Location).toBeTruthy(); // Todos: Check presence of uuid in headers?
     expect(result.statusCode).toBe(201);
     // ...
   });

@@ -1,7 +1,7 @@
 {
-  "httpMethod": "POST",
   "requestContext": { "domainName": "domainName", "stage": "stage" },
+  "path": "/handovers",
+  "httpMethod": "POST",
   "headers": {},
-  "body": "{ \"property1\": \"1\", \"property2\": \"2\" }",
-  "path": "/handovers"
+  "body": {}
 }
