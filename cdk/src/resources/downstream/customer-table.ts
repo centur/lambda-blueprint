@@ -20,7 +20,6 @@ export default class CustomerTable extends cdk.Stack {
       exportName: table,
       value:      table,
     });
-
     // ...
   }
 }

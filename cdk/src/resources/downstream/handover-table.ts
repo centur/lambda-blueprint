@@ -20,7 +20,6 @@ export default class HandoverTable extends cdk.Stack {
       exportName: table,
       value:      table,
     });
-
     // ...
   }
 }
