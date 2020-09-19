@@ -21,9 +21,7 @@ describe("create-lambda", () => {
     // @ts-ignore
     expect(result.headers.Location).toBeTruthy(); // Todos: Check presence of uuid in headers?
     expect(result.statusCode).toBe(201);
-
     // ...
   });
-
   // ...
 });
