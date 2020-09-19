@@ -21,6 +21,6 @@ export const deepCopy = <T1 extends Record<string, any>, T2 extends Record<strin
 };
 
 export const assertNotNull = (object: any): any => {
-  if (object === null) { throw new Error400(); }
+  if (object == null) throw new Error400();
   return object;
 };

@@ -7,7 +7,7 @@ import * as Redis from "ioredis";
   await redis.set(key, "bar");
 
   const val = await redis.get(key);
-  console.debug(`Val of key ${key} is: ${val}`);
 
+  console.debug(`Val of key ${key} is: ${val} ...`);
   redis.disconnect();
 })();

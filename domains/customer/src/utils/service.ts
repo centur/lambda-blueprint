@@ -5,15 +5,13 @@ import { UpdateDto } from "../dtos/update-dto";
 import { CustomerDto } from "../dtos/customer-dto";
 import { v4 as uuidv4 } from "uuid";
 
-const now = (): string => new Date().toISOString();
-
 export class Service {
   constructor(
     private crudRepository: CrudRepository<Customer>
   ) {}
 
   async createCustomer(createDto: CreateDto): Promise<string> {
-    const timestamp = now();
+    const timestamp = new Date().toISOString();
 
     const customer: Customer = {
       id: uuidv4(),

@@ -5,15 +5,13 @@ import { UpdateDto } from "../dtos/update-dto";
 import { HandoverDto } from "../dtos/handover-dto";
 import { v4 as uuidv4 } from "uuid";
 
-const now = (): string => new Date().toISOString();
-
 export class Service {
   constructor(
     private crudRepository: CrudRepository<Handover>
   ) {}
 
   async createHandover(createDto: CreateDto): Promise<string> {
-    const timestamp = now();
+    const timestamp = new Date().toISOString();
 
     const handover: Handover = {
       id: uuidv4(),

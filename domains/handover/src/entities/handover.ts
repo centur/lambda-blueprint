@@ -1,9 +1,9 @@
-import { AuditableEntity } from "@lambda-blueprint/core";
-import * as t from "io-ts";
+import { Persistable } from "@lambda-blueprint/core";
 import { HandoverDto } from "../dtos/handover-dto";
+import * as t from "io-ts";
 
 export const Handover = t.intersection([
-  AuditableEntity,
+  Persistable,
   // ...
   t.strict({
     property1: t.string,
