@@ -42,7 +42,7 @@
     "@aws-cdk/aws-lambda": "^1.63.0",
     "@aws-cdk/aws-dynamodb": "^1.63.0",
     "@aws-cdk/aws-apigateway": "^1.63.0",
-    "aws-cdk": "^1.63.0",
+    "aws-cdk": "^1.66.0",
     "//3": [
       "---------------> devDependencies for bundler"
     ],
