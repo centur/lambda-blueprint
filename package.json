@@ -61,7 +61,7 @@
     "//6": [
       "---------------> devDependencies for types"
     ],
-    "@types/aws-lambda": "^8.10.62",
+    "@types/aws-lambda": "^8.10.63",
     "@types/jest": "^26.0.13",
     "@types/node": "^14.11.2",
     "@types/ioredis": "^4.17.4",
