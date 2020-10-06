@@ -57,7 +57,7 @@
     "artillery": "^1.6.1",
     "dotenv": "^8.2.0",
     "ts-jest": "^26.4.1",
-    "jest": "^26.4.2",
+    "jest": "^26.5.0",
     "//6": [
       "---------------> devDependencies for types"
     ],
